@@ -13,7 +13,11 @@ ssa.d(a = stop("missing propensity vector (a)"),
 \item{nu}{state-change matrix.}
 }
 \value{
-A list with two elements, 1) the time leap (\code{tau}) and 2) the realized state change vector (\code{nu_j}).
+A list with two elements:
+\itemize{
+\item the time leap (\code{tau}) and
+\item the realized state change vector (\code{nu_j}).
+}
 }
 \description{
 Direct method implementation of the \acronym{SSA} as described by Gillespie (1977).

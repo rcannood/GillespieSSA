@@ -6,7 +6,9 @@
 #' @param a vector of evaluated propensity functions.
 #' @param nu state-change matrix.
 #'
-#' @return A list with two elements, 1) the time leap (`tau`) and 2) the realized state change vector (`nu_j`).
+#' @return A list with two elements:
+#' * the time leap (`tau`) and
+#' * the realized state change vector (`nu_j`).
 #'
 #' @seealso [ssa.d()]
 #' @keywords misc datagen ts

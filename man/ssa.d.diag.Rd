@@ -12,7 +12,11 @@ ssa.d.diag(a, nu)
 \item{nu}{state-change matrix.}
 }
 \value{
-A list with two elements, 1) the time leap (\code{tau}) and 2) the realized state change vector (\code{nu_j}).
+A list with two elements:
+\itemize{
+\item the time leap (\code{tau}) and
+\item the realized state change vector (\code{nu_j}).
+}
 }
 \description{
 Performs one time step using the Direct method. It is usually called
