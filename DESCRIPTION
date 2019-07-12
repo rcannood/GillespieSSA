@@ -11,8 +11,7 @@ Imports:
 Authors@R: c(
     person("Mario", "Pineda-Krch", role = c("aut")),
     person(
-      "Robrecht", 
-      "Cannoodt", 
+      "Robrecht", "Cannoodt", 
       email = "rcannood@gmail.com", 
       role = c("aut", "cre"),
       comment = c(ORCID = "0000-0003-3641-729X")
