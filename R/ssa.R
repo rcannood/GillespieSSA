@@ -243,6 +243,8 @@
 #' }
 #'
 #' @keywords misc datagen ts
+#'
+#' @export
 ssa <- function(
   x0 = stop("undefined 'x0'"),
   a = stop("undefined 'a'"),
