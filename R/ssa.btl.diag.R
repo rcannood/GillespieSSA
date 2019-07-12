@@ -15,6 +15,8 @@
 #' * the time leap (`tau`) and
 #' * the realized state change vector (`nu_j`).
 #'
+#' @importFrom stats rbinom rpois
+#'
 #' @seealso [ssa.btl()],
 #' @keywords misc datagen ts
 ssa.btl.diag <- function(

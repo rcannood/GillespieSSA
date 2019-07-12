@@ -16,6 +16,7 @@
 #' should be displayed on the console.
 #' @seealso [ssa()]
 #' @keywords misc datagen ts
+#' @importFrom stats sd
 ssa.terminate <- function(
   args,
   out.rxn,

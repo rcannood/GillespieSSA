@@ -131,7 +131,7 @@ Metapopulation SIRS model (Pineda-Krch, 2008)\cr
 }
 }
 \seealso{
-\code{\link[=ssa]{ssa()}}, \code{\link[=ssa.direct]{ssa.direct()}}, \code{\link[=ssa.etl]{ssa.etl()}}, \code{\link[=ssa.btl]{ssa.btl()}}, \code{\link[=ssa.otl]{ssa.otl()}}, \code{\link[=ssa.plot]{ssa.plot()}}
+\code{\link[=ssa]{ssa()}}, \code{\link[=ssa.d]{ssa.d()}}, \code{\link[=ssa.etl]{ssa.etl()}}, \code{\link[=ssa.btl]{ssa.btl()}}, \code{\link[=ssa.otl]{ssa.otl()}}, \code{\link[=ssa.plot]{ssa.plot()}}
 }
 \concept{Binomial tau-leap method}
 \concept{Direct method}

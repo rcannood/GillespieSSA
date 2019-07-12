@@ -68,6 +68,10 @@
 #' out <- ssa(x0,a,nu,parms,tf=100,method="OTL",simName="Kermack-McKendrick SIR")
 #' ssa.plot(out,show.title=FALSE,show.legend=FALSE)
 #' }
+#'
+#' @importFrom grDevices rainbow
+#' @importFrom graphics matplot title mtext legend
+#'
 #' @export
 ssa.plot <- function(
   out = stop("requires simulation output object"),

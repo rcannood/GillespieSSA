@@ -125,7 +125,7 @@
 #' * Thomas Petzoldt for comments on the package, the JSS manuscript and for preparing version 0.5-4.
 #' * Three anonymous referees whose comments substantially improved some of the functionality.
 #'
-#' @seealso [ssa()], [ssa.direct()], [ssa.etl()], [ssa.btl()], [ssa.otl()], [ssa.plot()]
+#' @seealso [ssa()], [ssa.d()], [ssa.etl()], [ssa.btl()], [ssa.otl()], [ssa.plot()]
 #'
 #' @keywords package distribution
 NULL

@@ -277,7 +277,7 @@ ssa.plot(out)
 
 }
 \seealso{
-\link{GillespieSSA-package}, \code{\link[=ssa.direct]{ssa.direct()}}, \code{\link[=ssa.etl]{ssa.etl()}}, \code{\link[=ssa.btl]{ssa.btl()}}, \code{\link[=ssa.otl]{ssa.otl()}}
+\link{GillespieSSA-package}, \code{\link[=ssa.d]{ssa.d()}}, \code{\link[=ssa.etl]{ssa.etl()}}, \code{\link[=ssa.btl]{ssa.btl()}}, \code{\link[=ssa.otl]{ssa.otl()}}
 }
 \keyword{datagen}
 \keyword{misc}

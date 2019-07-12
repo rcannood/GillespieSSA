@@ -74,6 +74,8 @@
 #' due to `OTL` suspension (only applicable for the `OTL` method).}
 #' @seealso [ssa()]
 #' @keywords misc datagen ts
+#'
+#' @importFrom utils flush.console
 ssa.run <- function(x0,a,nu,parms,tf,method,tau,f,epsilon,nc,hor,dtf,nd,
                     ignoreNegativeState,consoleInterval,censusInterval,
                     verbose,maxWallTime) {

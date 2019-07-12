@@ -182,7 +182,7 @@
 #'   ssa.plot(out)
 #' }
 #'
-#' @seealso [GillespieSSA-package], [ssa.direct()], [ssa.etl()], [ssa.btl()], [ssa.otl()]
+#' @seealso [GillespieSSA-package], [ssa.d()], [ssa.etl()], [ssa.btl()], [ssa.otl()]
 #'
 #' @keywords misc datagen ts
 #' @examples

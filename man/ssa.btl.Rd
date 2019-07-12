@@ -35,7 +35,6 @@ Performs one time step using the Binomial tau-leap method. Intended to be
 invoked by \code{\link[=ssa]{ssa()}}.
 }
 \examples{
-
 a <- function(parms,x){
   b <- parms[1]
   d <- parms[2]

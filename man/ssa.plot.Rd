@@ -86,6 +86,7 @@ ssa.plot(out,show.title=FALSE,show.legend=FALSE)
 out <- ssa(x0,a,nu,parms,tf=100,method="OTL",simName="Kermack-McKendrick SIR")
 ssa.plot(out,show.title=FALSE,show.legend=FALSE)
 }
+
 }
 \seealso{
 \link{GillespieSSA-package}, \code{\link[=ssa]{ssa()}}

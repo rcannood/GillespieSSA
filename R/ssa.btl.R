@@ -19,8 +19,10 @@
 #' @seealso [GillespieSSA-package], [`ssa()`][ssa]
 #' @references Chatterjee et al. (2005)
 #' @keywords datagen misc ts
-#' @examples
 #'
+#' @importFrom stats rbinom rpois
+#'
+#' @examples
 #' a <- function(parms,x){
 #'   b <- parms[1]
 #'   d <- parms[2]
