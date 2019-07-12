@@ -1,6 +1,8 @@
 #' Direct method (D) for nu-diagonalized systems
 #'
-#' Performs one time step using the Direct method. It is usually called
+#' Direct method (D) for nu-diagonalized systems.
+#'
+#' @details Performs one time step using the Direct method. It is usually called
 #' from within [ssa()], but can be invoked directly, see [ssa.d()] for Examples.
 #'
 #' @param a vector of evaluated propensity functions.

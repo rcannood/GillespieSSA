@@ -19,6 +19,9 @@ A list with two elements:
 }
 }
 \description{
+Direct method (D) for nu-diagonalized systems.
+}
+\details{
 Performs one time step using the Direct method. It is usually called
 from within \code{\link[=ssa]{ssa()}}, but can be invoked directly, see \code{\link[=ssa.d]{ssa.d()}} for Examples.
 }
