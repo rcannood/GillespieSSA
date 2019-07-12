@@ -69,33 +69,33 @@
 #' foolproof as the Direct method.
 #'
 #' @section Example models:
-#' Individual demo models can be run by issuing \code{demo(<model name>)},
-#' alternatively all of the demo models can be run using \code{demo(GillespieSSA)}.
+#' Individual demo models can be run by issuing `demo(<model name>)`,
+#' alternatively all of the demo models can be run using `demo(GillespieSSA)`.
 #' The following example models are available:
 #'
 #' \tabular{l}{
 #'   Decaying-Dimerization Reaction Set (Gillespie, 2001)\cr
-#'   \code{file.show(system.file("demo/decayingDimer.R", package = "GillespieSSA"))} \cr
+#'   `file.show(system.file("demo/decayingDimer.R", package = "GillespieSSA"))` \cr
 #'   \cr
 #'   Linear Chain System (Cao et al., 2004)\cr
-#'   \code{file.show(system.file("demo/linearChain.R", package = "GillespieSSA"))} \cr
+#'   `file.show(system.file("demo/linearChain.R", package = "GillespieSSA"))` \cr
 #'   \cr
 #'   Logistic growth model (Kot, 2001)\cr
-#'   \code{file.show(system.file("demo/logisticGrowth.R", package = "GillespieSSA"))} \cr
+#'   `file.show(system.file("demo/logisticGrowth.R", package = "GillespieSSA"))` \cr
 #'   \cr
 #'   Lotka predator-prey model (Gillespie, 1977; Kot, 2001)\cr
-#'   \code{file.show(system.file("demo/lotka.R", package = "GillespieSSA"))} \cr
+#'   `file.show(system.file("demo/lotka.R", package = "GillespieSSA"))` \cr
 #'   \cr
 #'   Kermack-McKendrick SIR model (Brown & Rothery, 1993)\cr
-#'   \code{file.show(system.file("demo/sir.R", package = "GillespieSSA"))} \cr
+#'   `file.show(system.file("demo/sir.R", package = "GillespieSSA"))` \cr
 #'   \cr
 #'   Logistic growth (Pearl-Verhulst model) (Kot, 2001, Pineda-Krch, 2008)
 #'   \cr
 #'   Rosenzweig-MacArthur predator-prey model (Pineda-Krch et al., 2007, Pineda-Krch, 2008) \cr
-#'   \code{file.show(system.file("demo/rma.R", package = "GillespieSSA"))} \cr
+#'   `file.show(system.file("demo/rma.R", package = "GillespieSSA"))` \cr
 #'   \cr
 #'   Metapopulation SIRS model (Pineda-Krch, 2008)\cr
-#'   \code{file.show(system.file("demo/epiChain.R", package = "GillespieSSA"))} \cr
+#'   `file.show(system.file("demo/epiChain.R", package = "GillespieSSA"))` \cr
 #' }
 #' @section How to cite this package:
 #' \preformatted{
@@ -105,19 +105,18 @@
 #'   url    = http://pineda-krch.com/gillespiessa
 #' }
 #'
-#' @references \itemize{
-#'   \item Brown D. and Rothery P. 1993. Models in biology: mathematics, statistics, and computing. John Wiley & Sons.
-#'   \item Cao Y., Li H., and Petzold L. 2004. Efficient formulation of the stochastic simulation algorithm for chemically reacting systems. J. Chem. Phys. 121:4059-4067. \url{http://dx.doi.org/10.1063/1.1778376 }
-#'   \item Cao Y., Gillespie D.T., and Petzold L.R. 2006. Efficient step size selection for the tau-leaping method. J. Chem. Phys. 124:044109. \url{http://dx.doi.org/10.1063/1.2159468}
-#'   \item Cao Y., Gillespie D.T., and Petzold L.R. 2007. Adaptive explicit tau-leap method with automatic tau selection. J. Chem. Phys. 126:224101. \url{http://dx.doi.org/10.1063/1.2745299 }
-#'   \item Chatterjee A., Vlachos D.G., and Katsoulakis M.A. 2005. Binomial distribution based tau-leap accelerated stochastic simulation. J. Chem. Phys. 122:024112. \url{http://dx.doi.org/10.1063/1.1833357}
-#'   \item Gillespie D.T. 1977. Exact stochastic simulation of coupled chemical reactions. J. Phys. Chem. 81:2340. \url{http://dx.doi.org/10.1021/j100540a008}
-#'   \item Gillespie D.T. 2001. Approximate accelerated stochastic simulation of chemically reacting systems. J. Chem. Phys. 115:1716-1733. \url{http://dx.doi.org/10.1063/1.1378322 }
-#'   \item Gillespie D.T. 2007. Stochastic simulation of chemical kinetics. Annu. Rev. Chem. 58:35 \url{http://dx.doi.org/10.1146/annurev.physchem.58.032806.104637}
-#'   \item Kot M. 2001. Elements of mathematical ecology. Cambridge University Press. \url{http://dx.doi.org/10.2277/052180213X}
-#'   \item Pineda-Krch M. 2008. Implementing the stochastic simulation algorithm in R. Submitted to the Journal of Statistical Software 25(12): 1-18. \url{http://www.jstatsoft.org/v25/i12}
-#'   \item Pineda-Krch M., Blok H.J., Dieckmann U., and Doebeli M. 2007. A tale of two cycles --- distinguishing quasi-cycles and limit cycles in finite predator-prey populations. Oikos 116:53-64. \url{http://dx.doi.org/10.1111/j.2006.0030-1299.14940.x}
-#' }
+#' @references
+#'  * Brown D. and Rothery P. 1993. Models in biology: mathematics, statistics, and computing. John Wiley & Sons.
+#'  * Cao Y., Li H., and Petzold L. 2004. Efficient formulation of the stochastic simulation algorithm for chemically reacting systems. J. Chem. Phys. 121:4059-4067. <http://dx.doi.org/10.1063/1.1778376 >
+#'  * Cao Y., Gillespie D.T., and Petzold L.R. 2006. Efficient step size selection for the tau-leaping method. J. Chem. Phys. 124:044109. <http://dx.doi.org/10.1063/1.2159468>
+#'  * Cao Y., Gillespie D.T., and Petzold L.R. 2007. Adaptive explicit tau-leap method with automatic tau selection. J. Chem. Phys. 126:224101. <http://dx.doi.org/10.1063/1.2745299 >
+#'  * Chatterjee A., Vlachos D.G., and Katsoulakis M.A. 2005. Binomial distribution based tau-leap accelerated stochastic simulation. J. Chem. Phys. 122:024112. <http://dx.doi.org/10.1063/1.1833357>
+#'  * Gillespie D.T. 1977. Exact stochastic simulation of coupled chemical reactions. J. Phys. Chem. 81:2340. <http://dx.doi.org/10.1021/j100540a008>
+#'  * Gillespie D.T. 2001. Approximate accelerated stochastic simulation of chemically reacting systems. J. Chem. Phys. 115:1716-1733. <http://dx.doi.org/10.1063/1.1378322 >
+#'  * Gillespie D.T. 2007. Stochastic simulation of chemical kinetics. Annu. Rev. Chem. 58:35 <http://dx.doi.org/10.1146/annurev.physchem.58.032806.104637>
+#'  * Kot M. 2001. Elements of mathematical ecology. Cambridge University Press. <http://dx.doi.org/10.2277/052180213X>
+#'  * Pineda-Krch M. 2008. Implementing the stochastic simulation algorithm in R. Submitted to the Journal of Statistical Software 25(12): 1-18. <http://www.jstatsoft.org/v25/i12>
+#'  * Pineda-Krch M., Blok H.J., Dieckmann U., and Doebeli M. 2007. A tale of two cycles --- distinguishing quasi-cycles and limit cycles in finite predator-prey populations. Oikos 116:53-64. <http://dx.doi.org/10.1111/j.2006.0030-1299.14940.x>
 #'
 #' @section Acknowledgements:
 #' * Heinrich zu Dohna for many caffein induced discussions on the package and reference manual, and for providing comments on the vignette documentation.
