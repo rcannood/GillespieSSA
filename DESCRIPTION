@@ -1,10 +1,18 @@
 Package: GillespieSSA
+Type: Package
 Title: Gillespie's Stochastic Simulation Algorithm (SSA)
-Version: 0.5-4
-Date: 2010-08-16
-Author: Mario Pineda-Krch <mpineda@math.ualbeta.ca>
-Maintainer: ORPHANED
+Version: 0.6-0
 Depends: R (>= 2.0.0)
+Authors@R: c(
+    person("Mario", "Pineda-Krch", role = c("aut")),
+    person(
+      "Robrecht", 
+      "Cannoodt", 
+      email = "rcannood@gmail.com", 
+      role = c("aut", "cre"),
+      comment = c(ORCID = "0000-0003-3641-729X")
+    )
+  )
 Description: GillespieSSA provides a simple to use, intuitive, and
         extensible interface to several stochastic simulation
         algorithms for generating simulated trajectories of finite
@@ -19,11 +27,9 @@ Description: GillespieSSA provides a simple to use, intuitive, and
         predator-prey model, Rosenzweig-MacArthur predator-prey model,
         Kermack-McKendrick SIR model, and a metapopulation SIRS model.
 License: GPL (>= 3)
-URL: http://pineda-krch.com/gillespiessa
-Packaged: 2010-08-16 17:09:04 UTC; mpineda
-Repository: CRAN
-Date/Publication: 2012-01-15 12:32:46
-NeedsCompilation: no
-X-CRAN-Original-Maintainer: Mario Pineda-Krch <mpineda@math.ualbeta.ca>
-X-CRAN-Comment: Orphaned on 2014-01-12 as maintainer address
-        <mpineda@math.ualbeta.ca> bounced.
+URL: https://www.github.com/rcannood/GillespieSSA
+LazyData: TRUE
+Suggests: testthat
+RoxygenNote: 5.0.1
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
