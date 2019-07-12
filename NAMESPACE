@@ -3,5 +3,7 @@
 export(ssa)
 export(ssa.d)
 export(ssa.d.diag)
+export(ssa.etl)
 export(ssa.nutiling)
+importFrom(stats,rpois)
 importFrom(stats,runif)
