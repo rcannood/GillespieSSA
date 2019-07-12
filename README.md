@@ -11,13 +11,14 @@ interface to several stochastic simulation algorithms for generating
 simulated trajectories of finite population continuous-time model.
 Currently it implements Gillespie’s exact stochastic simulation
 algorithm (Direct method) and several approximate methods (Explicit
-tau-leap, Binomial tau-leap, and Optimized tau-leap). The package also
-contains a library of template models that can be run as demo models and
-can easily be customized and extended. Currently the following models
-are included, decaying-dimerization reaction set, linear chain system,
-logistic growth model, Lotka predator-prey model, Rosenzweig-MacArthur
-predator-prey model, Kermack-McKendrick SIR model, and a metapopulation
-SIRS model.
+tau-leap, Binomial tau-leap, and Optimized tau-leap).
+
+The package also contains a library of template models that can be run
+as demo models and can easily be customized and extended. Currently the
+following models are included, decaying-dimerization reaction set,
+linear chain system, logistic growth model, Lotka predator-prey model,
+Rosenzweig-MacArthur predator-prey model, Kermack-McKendrick SIR model,
+and a metapopulation SIRS model.
 
 ## Install
 
