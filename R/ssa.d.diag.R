@@ -1,24 +1,29 @@
-# Copyright 2007, 2008, 2010 Mario Pineda-Krch.
-#
-# This file is part of the R package GillespieSSA.
-#
-# GillespieSSA is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
+#' Direct method (D) for nu-diagonalized systems
+#'
+#' Performs one time step using the Direct method. It is usually called
+#' from within [ssa()], but can be invoked directly, see [ssa.d()] for Examples.
+#'
+#' @param a vector of evaluated propensity functions.
+#' @param nu state-change matrix.
+#'
+#' @return A list with two elements, 1) the time leap (`tau`) and 2) the realized state change vector (`nu_j`).
+#'
+#' @seealso [ssa.d()]
+#' @keywords misc datagen ts
+#'
+#' @importFrom stats runif
+#'
+#' @examples
+#' ## Not intended to be invoked stand alone
+#'
+#' @export
+ssa.d.diag <- function(a, nu) {
+  j <- sample.int(length(a), size = 1, prob = a)
+  nu_j <- ssa.nutiling(a, nu, j)
+  tau <- -log(runif(1)) / sum(a)
 
-# GillespieSSA is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with GillespieSSA.  If not, see <http://www.gnu.org/licenses/>.
-
-`ssa.d.diag` <-
-function(a, nu) {
-  j    <- sample(seq(length(a)), size=1, prob=a)
-  nu_j <- ssa.nutiling(a,nu,j)
-  tau  <- -log(runif(1))/sum(a)
-  return(list(tau=tau, nu_j=nu_j))
+  list(
+    tau = tau,
+    nu_j = nu_j
+  )
 }
