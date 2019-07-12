@@ -74,8 +74,15 @@ equal the number of states \eqn{N}. Only applicable in the \code{OTL} method.}
 (i.e. \eqn{\tau_{\mathtt{OTL}} < \mathtt{dtf} \times \tau_{\mathtt{D}}}{tau_OTL<dtf*\tau_D})
 (See step 3, page 3 in Cao et al. 2006).}
 
-\item{nd}{number of single-reaction steps performed using the Direct method during \code{otl} suspension (See step 3, page 3, Cao et al. 2006).
-\item{ignoreNegativeState}{boolean object indicating if negative state values should be ignored (this can occur in the \code{etl} method). If \code{ignoreNegativeState=TRUE} the simulation finishes gracefully when encountering a negative population size (i.e. does not throw an error). If \code{ignoreNegativeState=FALSE} the simulation stops with an error message when encountering a negative population size.}}
+\item{nd}{number of single-reaction steps performed using the Direct method
+during \code{otl} suspension (See step 3, page 3, Cao et al. 2006).}
+
+\item{ignoreNegativeState}{boolean object indicating if negative state
+values should be ignored (this can occur in the \code{etl} method).
+If \code{ignoreNegativeState=TRUE} the simulation finishes gracefully when
+encountering a negative population size (i.e. does not throw an error).
+If \code{ignoreNegativeState=FALSE} the simulation stops with an error
+message when encountering a negative population size.}
 
 \item{consoleInterval}{(approximate) interval at which \code{ssa} produces
 simulation status output on the console (assumes \code{verbose=TRUE}).
@@ -166,8 +173,7 @@ state-change matrix (\code{nu}), propensity vector (\code{a}), and the final
 time of the simulation (\code{tf}). The initial state vector defines the
 population sizes in all the states at \eqn{t=0}, e.g. for a system with two
 species \code{X1} and \code{X2} where both have an initial population size
-of 1000 the initial state vector is defined as \code{x0 <-
-  c(X1=1000,X2=1000)}. The elements of the vector have to be labelled using
+of 1000 the initial state vector is defined as \code{x0 <- c(X1=1000,X2=1000)}. The elements of the vector have to be labelled using
 the same notation as the state variables used in the propensity functions.
 The state-change matrix defines the change in the number of individuals in
 each state (rows) as caused by one reaction of a given type (columns). For
@@ -271,7 +277,7 @@ ssa.plot(out)
 
 }
 \seealso{
-\link{GillespieSSA-package}, \code{\link{ssa.direct}}, \code{\link{ssa.etl}}, \code{\link{ssa.btl}}, \code{\link{ssa.otl}}
+\link{GillespieSSA-package}, \code{\link[=ssa.direct]{ssa.direct()}}, \code{\link[=ssa.etl]{ssa.etl()}}, \code{\link[=ssa.btl]{ssa.btl()}}, \code{\link[=ssa.otl]{ssa.otl()}}
 }
 \keyword{datagen}
 \keyword{misc}
