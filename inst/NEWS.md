@@ -1,3 +1,9 @@
+# GillespieSSA 0.6.1 (unreleased)
+
+* DOCUMENTATION: Remove \dontrun's from examples.
+
+* BUG FIX: Fix examples.
+
 # GillespieSSA 0.6.0 (2019-07-12)
 
 * MAINTAINER: Maintainer has been changed to Robrecht Cannoodt.

@@ -222,58 +222,46 @@ The resulting time series can then be displayed by,
 
 ## Irreversible isomerization
 ## Large initial population size (X=1000)
-\dontrun{
 parms <- c(c=0.5)
 x0  <- c(X=10000)
 a   <- c("c*X")
 nu  <- matrix(-1)
 out <- ssa(x0,a,nu,parms,tf=10,simName="Irreversible isomerization") # Direct method
 plot(out$data[,1],out$data[,2]/10000,col="red",cex=0.5,pch=19)
-}
 
 ## Smaller initial population size (X=100)
-\dontrun{
 x0  <- c(X=100)
 out <- ssa(x0,a,nu,parms,tf=10) # Direct method
 points(out$data[,1],out$data[,2]/100,col="green",cex=0.5,pch=19)
-}
 
 ## Small initial population size (X=10)
-\dontrun{
 x0  <- c(X=10)
 out <- ssa(x0,a,nu,parms,tf=10) # Direct method
 points(out$data[,1],out$data[,2]/10,col="blue",cex=0.5,pch=19)
-}
 
 ## Logistic growth
-\dontrun{
 parms <- c(b=2, d=1, K=1000)
 x0  <- c(N=500)
 a   <- c("b*N", "(d+(b-d)*N/K)*N")
 nu  <- matrix(c(+1,-1),ncol=2)
-out <- ssa(x0,a,nu,parms,tf=10,method="D",max.duration=5,simName="Logistic growth")
+out <- ssa(x0,a,nu,parms,tf=10,method="D",maxWallTime=5,simName="Logistic growth")
 ssa.plot(out)
-}
 
 ## Kermack-McKendrick SIR model
-\dontrun{
 parms <- c(beta=0.001, gamma=0.1)
 x0  <- c(S=499,I=1,R=0)
 a   <- c("beta*S*I","gamma*I")
 nu  <- matrix(c(-1,0,+1,-1,0,+1),nrow=3,byrow=TRUE)
 out <- ssa(x0,a,nu,parms,tf=100,simName="SIR model")
 ssa.plot(out)
-}
 
 ## Lotka predator-prey model
-\dontrun{
 parms <- c(c1=10, c2=.01, c3=10)
 x0  <- c(Y1=1000,Y2=1000)
 a   <- c("c1*Y1","c2*Y1*Y2","c3*Y2")
 nu  <- matrix(c(+1,-1,0,0,+1,-1),nrow=2,byrow=TRUE)
 out <- ssa(x0,a,nu,parms,tf=100,method="ETL",simName="Lotka predator-prey model")
 ssa.plot(out)
-}
 
 }
 \seealso{
