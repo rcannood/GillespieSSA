@@ -77,25 +77,27 @@
 #'   Decaying-Dimerization Reaction Set (Gillespie, 2001)\cr
 #'   `file.show(system.file("demo/decayingDimer.R", package = "GillespieSSA"))` \cr
 #'   \cr
+#'   Metapopulation SIRS model (Pineda-Krch, 2008)\cr
+#'   `file.show(system.file("demo/epiChain.R", package = "GillespieSSA"))` \cr
+#'   \cr
 #'   Linear Chain System (Cao et al., 2004)\cr
 #'   `file.show(system.file("demo/linearChain.R", package = "GillespieSSA"))` \cr
 #'   \cr
-#'   Logistic growth model (Kot, 2001)\cr
+#'   Logistic growth (Pearl-Verhulst model) (Kot, 2001, Pineda-Krch, 2008) \cr
 #'   `file.show(system.file("demo/logisticGrowth.R", package = "GillespieSSA"))` \cr
 #'   \cr
 #'   Lotka predator-prey model (Gillespie, 1977; Kot, 2001)\cr
 #'   `file.show(system.file("demo/lotka.R", package = "GillespieSSA"))` \cr
 #'   \cr
-#'   Kermack-McKendrick SIR model (Brown & Rothery, 1993)\cr
-#'   `file.show(system.file("demo/sir.R", package = "GillespieSSA"))` \cr
-#'   \cr
-#'   Logistic growth (Pearl-Verhulst model) (Kot, 2001, Pineda-Krch, 2008)
+#'   Radioactive decay model (Gillespie, 1977)\cr
+#'   `file.show(system.file("demo/radioactiveDecay.R", package = "GillespieSSA"))` \cr
 #'   \cr
 #'   Rosenzweig-MacArthur predator-prey model (Pineda-Krch et al., 2007, Pineda-Krch, 2008) \cr
 #'   `file.show(system.file("demo/rma.R", package = "GillespieSSA"))` \cr
 #'   \cr
-#'   Metapopulation SIRS model (Pineda-Krch, 2008)\cr
-#'   `file.show(system.file("demo/epiChain.R", package = "GillespieSSA"))` \cr
+#'   Kermack-McKendrick SIR model (Brown & Rothery, 1993)\cr
+#'   `file.show(system.file("demo/sir.R", package = "GillespieSSA"))` \cr
+#'   \cr
 #' }
 #' @section How to cite this package:
 #' \preformatted{
