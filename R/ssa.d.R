@@ -18,7 +18,7 @@
 #'
 #' @examples
 #' ## Logistic growth model
-#' a = function(parms,x){
+#' a <- function(parms,x){
 #'   b <- parms[1]
 #'   d <- parms[2]
 #'   K <- parms[3]
