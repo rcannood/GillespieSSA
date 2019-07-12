@@ -3,3 +3,10 @@
 ^\.Rhistory$
 ^\.travis\.yml$
 ^cran-comments\.md$
+^revdep$
+^\.git$
+^appveyor\.yml$
+^README\.Rmd$
+^vignettes/.*\.html$
+^vignettes/.*\.md$
+^vignettes/.*/.*\.png$
