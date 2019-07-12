@@ -107,10 +107,9 @@ changes.
     [doi:10.1146/annurev.physchem.58.032806.104637](http://dx.doi.org/10.1146/annurev.physchem.58.032806.104637)
   - Kot M. 2001. Elements of mathematical ecology. Cambridge University
     Press.
-    [doi:10.2277/052180213X](http://dx.doi.org/10.2277/052180213X)
+    [doi:10.1017/CBO9780511608520](http://dx.doi.org/10.1017/CBO9780511608520)
   - Pineda-Krch M. 2008. Implementing the stochastic simulation
-    algorithm in R. Submitted to the Journal of Statistical Software
-    25(12): 1-18.
+    algorithm in R. Journal of Statistical Software 25(12): 1-18.
     [doi: 10.18637/jss.v025.i12](http://dx.doi.org/10.18637/jss.v025.i12)
   - Pineda-Krch M., Blok H.J., Dieckmann U., and Doebeli M. 2007. A tale
     of two cycles — distinguishing quasi-cycles and limit cycles in
