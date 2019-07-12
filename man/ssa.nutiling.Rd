@@ -19,10 +19,6 @@ The virtual realized state change vector (\code{nu_j}).
 \description{
 Auxiliary function for \code{ssa.d.diag} performing virtual mapping of nu-diagonalized systems.
 }
-\examples{
-## Not intended to be invoked stand alone
-
-}
 \seealso{
 \code{\link[=ssa.d.diag]{ssa.d.diag()}}, \code{\link[=ssa.d]{ssa.d()}}
 }

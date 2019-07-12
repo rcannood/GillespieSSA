@@ -1,30 +1,85 @@
-# Copyright 2007, 2008, 2010 Mario Pineda-Krch.
-#
-# This file is part of the R package GillespieSSA.
-#
-# GillespieSSA is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# GillespieSSA is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with GillespieSSA.  If not, see <http://www.gnu.org/licenses/>.
-
-ssa.plot <- function(out = stop("requires simulation output object"), 
-                    file = "ssaplot",
-                      by = 1,
-               plot.from = 2,
-                 plot.to = dim(out$data)[2],
-                 plot.by = 1, # number: increment of the sequence.
-              show.title = TRUE,
-             show.legend = TRUE){
+#' Simple plotting of ssa output
+#'
+#' Provides basic functionally for simple and quick time series plot of
+#' simulation output from [ssa()].
+#'
+#' @param out data object returned from [ssa()].
+#' @param file name of the output file (only applicable if
+#' `plot.device!="x11"`.
+#' @param by time increment in the plotted time series
+#' @param plot.from first population to plot the time series for (see note)
+#' @param plot.to last population to plot the time series for (see note)
+#' @param plot.by increment in the sequence of populations to plot the time
+#' series for (see note)
+#' @param show.title boolean object indicating if the plot should display a
+#' title
+#' @param show.legend boolean object indicating if the legend is displayed
+#' @note The options `by`, `plot.from`, `plot.to`, and
+#' `plot.by` can be used to plot a sparser sequence of data points. To
+#' plot the population sizes using a larger time interval the `by` option
+#' can be set, e.g. to plot only every 10th time point `by=10`. To plot
+#' only specific populations the `plot.from`, `plot.to`, and
+#' `plot.by` options can be set to subset the state vector. Note that the
+#' indexing of the populations is based on the \eqn{(t,\mathbf{X})}{(t,X)}
+#' vector, i.e. the first column is the time vector while the first population
+#' is index by 2 and the last population by \eqn{N+1}. Display of a plot title
+#' above the plot and legend is optional (and are set with the arguments
+#' show.title and show.legend. Above the plot panel miscellaneous information
+#' for the simulation are displayed, i.e. method, elapsed wall time, number of
+#' time steps executed, and the number of time steps per data point.
+#' @seealso [GillespieSSA-package], [ssa()]
+#' @keywords misc datagen ts device utilities hplot
+#'
+#' @examples
+#' \dontrun{
+#' ## Define the Kermack-McKendrick SIR model and run once using the Direct method
+#' parms <- c(beta=.001, gamma=.100)
+#' x0 <- c(S=500, I=1, R=0)                      # Initial state vector
+#' nu <- matrix(c(-1,0,1,-1,0,1),nrow=3,byrow=T) # State-change matrix
+#' a  <- c("beta*S*I", "gamma*I")                # Propensity vector
+#' tf <- 100                                     # Final time
+#' simName <- "Kermack-McKendrick SIR"
+#' out <- ssa(x0,a,nu,parms,tf,method="D",simName,verbose=TRUE,consoleInterval=1)
+#' }
+#' \dontrun{
+#' ## Basic ssa plot
+#' ssa.plot(out)
+#' }
+#' \dontrun{
+#' # Plot only the infectious class
+#' ssa.plot(out,plot.from=3,plot.to=3)
+#' }
+#' \dontrun{
+#' ## Multipanel plot using different SSA methods
+#' layout(matrix(seq(4),ncol=4,byrow=TRUE))
+#'
+#' ## Using the Direct method
+#' ssa.plot(out)
+#'
+#' ## Run and plot results using the ETL method
+#' out <- ssa(x0,a,nu,parms,tf=100,method="ETL",simName="Kermack-McKendrick SIR")
+#' ssa.plot(out,show.title=FALSE,show.legend=FALSE)
+#'
+#' ## Run and plot results using the BTL method
+#' out <- ssa(x0,a,nu,parms,tf=100,method="BTL",simName="Kermack-McKendrick SIR")
+#' ssa.plot(out,show.title=FALSE,show.legend=FALSE)
+#'
+#' ## Run and plot results using the OTL method
+#' out <- ssa(x0,a,nu,parms,tf=100,method="OTL",simName="Kermack-McKendrick SIR")
+#' ssa.plot(out,show.title=FALSE,show.legend=FALSE)
+#' }
+#' @export
+ssa.plot <- function(
+  out = stop("requires simulation output object"),
+  file = "ssaplot",
+  by = 1,
+  plot.from = 2,
+  plot.to = dim(out$data)[2],
+  plot.by = 1, # number: increment of the sequence.
+  show.title = TRUE,
+  show.legend = TRUE){
   if ((plot.from == 1) || (plot.from > dim(out$data)[2])|| (plot.from > plot.to)) stop("error in plot.from/plot.to arguments")
-                      
+
   # Render the plot(s)
   colorVector <- rainbow(dim(out$data)[2]-1)
   mask <- seq(1,dim(out$data)[1],by)
@@ -40,9 +95,9 @@ ssa.plot <- function(out = stop("requires simulation output object"),
   legendTxt <- names(out$arg$x0)
 
   # If there are more states than 20 the legend starts to look crazy, so we don't show it...
-  if (length(legendTxt) < 20 & show.legend) legend("topright",legend=legendTxt,bty="y",pch=19,col=colorVector) 
+  if (length(legendTxt) < 20 & show.legend) legend("topright",legend=legendTxt,bty="y",pch=19,col=colorVector)
 
   stepShowStr <- paste("(",by," steps/point)",sep="")
-  textStr <- paste(out$args$method,", ",round(out$stats$elapsedWallTime,2)," sec, ",out$stats$nSteps," steps ",stepShowStr,sep="") 
+  textStr <- paste(out$args$method,", ",round(out$stats$elapsedWallTime,2)," sec, ",out$stats$nSteps," steps ",stepShowStr,sep="")
   mtext(textStr,line=0,cex=0.75)
 }

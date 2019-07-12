@@ -17,14 +17,9 @@
 #'
 #' @seealso [ssa.etl()]
 #'
-#' @examples
-#' ## Not intended to be invoked stand alone
-#'
 #' @keywords misc datagen ts
 #'
 #' @importFrom stats rpois
-#'
-#' @export
 ssa.etl.diag <- function(a, nu_tile, tau) {
   MU <- length(a)          # Toto nr of reaction channels
   k  <- rpois(MU, (a*tau)) # Nr of firings per channel

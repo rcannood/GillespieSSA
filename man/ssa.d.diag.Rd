@@ -25,10 +25,6 @@ Direct method (D) for nu-diagonalized systems.
 Performs one time step using the Direct method. It is usually called
 from within \code{\link[=ssa]{ssa()}}, but can be invoked directly, see \code{\link[=ssa.d]{ssa.d()}} for Examples.
 }
-\examples{
-## Not intended to be invoked stand alone
-
-}
 \seealso{
 \code{\link[=ssa.d]{ssa.d()}}
 }

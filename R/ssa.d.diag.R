@@ -16,11 +16,6 @@
 #' @keywords misc datagen ts
 #'
 #' @importFrom stats runif
-#'
-#' @examples
-#' ## Not intended to be invoked stand alone
-#'
-#' @export
 ssa.d.diag <- function(a, nu) {
   j <- sample.int(length(a), size = 1, prob = a)
   nu_j <- ssa.nutiling(a, nu, j)

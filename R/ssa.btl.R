@@ -1,25 +1,26 @@
 #' Binomial tau-leap method (BTL)
 #'
-#' Binomial tau-leap method implementation of the \acronym{SSA} as described
-#' by Chatterjee et al. (2005). It is usually called from within \code{\link{ssa}},
-#' but can be invoked directly.
+#' Binomial tau-leap method implementation of the \acronym{SSA} as described by
+#' Chatterjee et al. (2005). It is usually called from within
+#' [ssa()], but can be invoked directly.
+#'
+#' Performs one time step using the Binomial tau-leap method. Intended to be
+#' invoked by [ssa()].
 #'
 #' @param x state vector.
 #' @param a vector of evaluated propensity functions.
 #' @param nu state-change matrix.
 #' @param f coarse-graining factor (see page 4 in Chatterjee et al. 2005).
 #'
-#' @details Performs one time step using the Binomial tau-leap method. Intended to be invoked by \code{\link{ssa}}.
-#'
 #' @return A list with two elements:
 #' * the time leap (`tau`) and
 #' * the realized state change vector (`nu_j`).
 #'
+#' @seealso [GillespieSSA-package], [`ssa()`][ssa]
 #' @references Chatterjee et al. (2005)
-#'
-#' @seealso [GillespieSSA-package], [ssa()]
-#'
+#' @keywords datagen misc ts
 #' @examples
+#'
 #' a <- function(parms,x){
 #'   b <- parms[1]
 #'   d <- parms[2]
@@ -38,11 +39,8 @@
 #'   cat("t:",t,", x:",x,"\n")
 #' }
 #'
-#' @importFrom stats rpois rbinom
 #'
-#' @keywords misc datagen ts
-#'
-#' @export
+#' @export ssa.btl
 ssa.btl <- function(
   x = stop("missing state vector (x)"),
   a = stop("missing propensity vector (a)"),

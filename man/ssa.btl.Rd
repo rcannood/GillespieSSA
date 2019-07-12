@@ -26,14 +26,16 @@ A list with two elements:
 }
 }
 \description{
-Binomial tau-leap method implementation of the \acronym{SSA} as described
-by Chatterjee et al. (2005). It is usually called from within \code{\link{ssa}},
-but can be invoked directly.
+Binomial tau-leap method implementation of the \acronym{SSA} as described by
+Chatterjee et al. (2005). It is usually called from within
+\code{\link[=ssa]{ssa()}}, but can be invoked directly.
 }
 \details{
-Performs one time step using the Binomial tau-leap method. Intended to be invoked by \code{\link{ssa}}.
+Performs one time step using the Binomial tau-leap method. Intended to be
+invoked by \code{\link[=ssa]{ssa()}}.
 }
 \examples{
+
 a <- function(parms,x){
   b <- parms[1]
   d <- parms[2]
@@ -51,6 +53,7 @@ for (i in seq(100)) {
   t <- t + 1
   cat("t:",t,", x:",x,"\\n")
 }
+
 
 }
 \references{

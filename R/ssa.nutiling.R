@@ -10,12 +10,7 @@
 #'
 #' @seealso [ssa.d.diag()], [ssa.d()]
 #'
-#' @examples
-#' ## Not intended to be invoked stand alone
-#'
 #' @keywords misc datagen ts
-#'
-#' @export
 ssa.nutiling <- function(a,nu,j) {
   M  <- dim(nu)[2]        # Number of reaction channels in nu-tile
   N  <- dim(nu)[1]        # Number of states in nu tile
