@@ -3,4 +3,5 @@
 export(ssa)
 export(ssa.d)
 export(ssa.d.diag)
+export(ssa.nutiling)
 importFrom(stats,runif)
