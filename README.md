@@ -38,22 +38,48 @@ devtools::install_github("rcannood/GillespieSSA", build_vignettes = TRUE)
 
 ## Examples
 
-Individual demo models can be run by issuing `demo(<model name>)`,
-alternatively all of the demo models can be run using
-`demo(GillespieSSA)`. The following example models are available:
+The following example models are available:
 
-  - [Decaying-Dimerisation Reaction Set](demo/decayingDimer.R)
-    (Gillespie, 2001)
-  - [Metapopulation SIRS model](demo/epiChain.R) (Pineda-Krch, 2008)
-  - [Linear Chain System](demo/linearChain.R) (Cao et al., 2004)
-  - [Logistic Growth (Pearl-Verhulst model)](demo/logisticGrowth.R)
-    (Kot, 2001; Pineda-Krch, 2008)
-  - [Lotka Predator-Prey model](demo/lotka.R) (Gillespie, 1977; Kot,
-    2001)
-  - [Radioactive Decay model](demo/radioactiveDecay.R) (Gillespie, 1977)
-  - [Rosenzweig-MacArthur Predator-Prey model](demo/rma.R) (Pineda-Krch
-    et al., 2007, Pineda-Krch, 2008)
-  - [Kermack-McKendrick SIR model](demo/sir.R) (Brown & Rothery, 1993)
+``` r
+walk(
+  list.files("vignettes", pattern = "*.Rmd"),
+  function(file) {
+    title <- 
+      read_lines(paste0("vignettes/", file)) %>% 
+      keep(~grepl("^title: ", .)) %>% 
+      gsub("title: \"(.*)\"", "\\1", .)
+    vignette_name <- gsub("\\.Rmd", "", file)
+    cat(
+      "* [", title, "](vignettes/", file, "): `vignette(\"", vignette_name, "\", package=\"GillespieSSA\")`\n",
+      sep = ""
+    )
+  }
+)
+```
+
+  - [Decaying-Dimerization Reaction Set (Gillespie,
+    2001)](vignettes/decaying_dimer.Rmd): `vignette("decaying_dimer",
+    package="GillespieSSA")`
+  - [SIRS metapopulation model (Pineda-Krch,
+    2008)](vignettes/epi_chain.Rmd): `vignette("epi_chain",
+    package="GillespieSSA")`
+  - [Linear Chain System (Cao et al.,
+    2004)](vignettes/linear_chain.Rmd): `vignette("linear_chain",
+    package="GillespieSSA")`
+  - [Pearl-Verhulst Logistic growth model (Kot,
+    2001)](vignettes/logistic_growth.Rmd): `vignette("logistic_growth",
+    package="GillespieSSA")`
+  - [Lotka predator-prey model (Gillespie, 1977; Kot,
+    2001)](vignettes/lotka_predator_prey.Rmd):
+    `vignette("lotka_predator_prey", package="GillespieSSA")`
+  - [Radioactive decay model (Gillespie,
+    1977)](vignettes/radioactive_decay.Rmd):
+    `vignette("radioactive_decay", package="GillespieSSA")`
+  - [Rosenzweig-MacArthur predator-prey model (Pineda-Krch et al.,
+    2007)](vignettes/rm_predator_prey.Rmd):
+    `vignette("rm_predator_prey", package="GillespieSSA")`
+  - [Kermack-McKendrick SIR model (Brown & Rothery,
+    1993)](vignettes/sir.Rmd): `vignette("sir", package="GillespieSSA")`
 
 ## Latest changes
 
@@ -63,16 +89,25 @@ changes.
 
 <!-- This section gets automatically generated from inst/NEWS.md, and also generates inst/NEWS -->
 
-### Recent changes in GillespieSSA 0.6.0 (2019-07-12)
+### Recent changes in GillespieSSA 0.6.0
 
   - MAINTAINER: Maintainer has been changed to Robrecht Cannoodt.
 
   - DOCUMENTATION: Documentation was roxygenised and markdownised.
 
+  - DOCUMENTATION: Port demo’s to vignettes.
+
   - DOCUMENTATION: Added NEWS and README.
+
+  - DOCUMENTATION: Remove ’s from examples.
+
+  - MINOR CHANGE: Many functions were refactorised in order to clean up
+    the code.
 
   - MINOR CHANGE: Functions which are marked “Not intended to be invoked
     stand alone.” are no longer being exported.
+
+  - BUG FIX: Fix warning and potential error in OTL.
 
 ### Recent changes in GillespieSSA 0.5-4 (2010-08-16)
 

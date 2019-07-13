@@ -1,8 +1,8 @@
 ---
-title: "Rosenzweig-MacArthur predator-prey model (Pineda-Krch et al., 2007, Pineda-Krch, 2008)"
+title: "Rosenzweig-MacArthur predator-prey model (Pineda-Krch et al., 2007)"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Rosenzweig-MacArthur predator-prey model (Pineda-Krch et al., 2007, Pineda-Krch, 2008)}
+  %\VignetteIndexEntry{Rosenzweig-MacArthur predator-prey model (Pineda-Krch et al., 2007)}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 

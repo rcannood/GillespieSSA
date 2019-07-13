@@ -1,8 +1,8 @@
 ---
-title: "Logistic growth (Pearl-Verhulst model) (Kot, 2001)"
+title: "Pearl-Verhulst Logistic growth model (Kot, 2001)"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Logistic growth (Pearl-Verhulst model) (Kot, 2001)}
+  %\VignetteIndexEntry{Pearl-Verhulst Logistic growth model (Kot, 2001)}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 

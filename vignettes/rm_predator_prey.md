@@ -1,5 +1,4 @@
-Rosenzweig-MacArthur predator-prey model (Pineda-Krch et al., 2007,
-Pineda-Krch, 2008)
+Rosenzweig-MacArthur predator-prey model (Pineda-Krch et al., 2007)
 ================
 
 <!-- github markdown built using 

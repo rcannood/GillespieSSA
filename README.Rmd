@@ -2,11 +2,13 @@
 output: 
   github_document:
     toc: TRUE
+editor_options: 
+  chunk_output_type: console
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-<a href="https://travis-ci.org/rcannood/GillespieSSA"><img src="https://travis-ci.org/rcannood/GillespieSSA.svg" align="left"></a> <a href="https://codecov.io/gh/rcannood/GillespieSSA">
+<a href="https://travis-ci.org/rcannood/GillespieSSA"><img src="https://travis-ci.org/rcannood/GillespieSSA.svg" align="left"></a>
 
 # `GillespieSSA`: Gillespie's Stochastic Simulation Algorithm (SSA)
 
@@ -19,6 +21,7 @@ knitr::opts_chunk$set(
   message = FALSE,
   dpi = 300
 )
+library(tidyverse)
 set.seed(1)
 ```
 
@@ -42,18 +45,34 @@ devtools::install_github("rcannood/GillespieSSA", build_vignettes = TRUE)
 
 ## Examples
 
-Individual demo models can be run by issuing `demo(<model name>)`,
-alternatively all of the demo models can be run using `demo(GillespieSSA)`.
 The following example models are available:
 
-* [Decaying-Dimerisation Reaction Set](demo/decayingDimer.R) (Gillespie, 2001)
-* [Metapopulation SIRS model](demo/epiChain.R) (Pineda-Krch, 2008)
-* [Linear Chain System](demo/linearChain.R) (Cao et al., 2004)
-* [Logistic Growth (Pearl-Verhulst model)](demo/logisticGrowth.R) (Kot, 2001; Pineda-Krch, 2008)
-* [Lotka Predator-Prey model](demo/lotka.R) (Gillespie, 1977; Kot, 2001)
-* [Radioactive Decay model](demo/radioactiveDecay.R) (Gillespie, 1977)
-* [Rosenzweig-MacArthur Predator-Prey model](demo/rma.R) (Pineda-Krch et al., 2007, Pineda-Krch, 2008)
-* [Kermack-McKendrick SIR model](demo/sir.R) (Brown & Rothery, 1993)
+```{r vignettes, results='asis'}
+walk(
+  list.files("vignettes", pattern = "*.Rmd"),
+  function(file) {
+    title <- 
+      read_lines(paste0("vignettes/", file)) %>% 
+      keep(~grepl("^title: ", .)) %>% 
+      gsub("title: \"(.*)\"", "\\1", .)
+    vignette_name <- gsub("\\.Rmd", "", file)
+    cat(
+      "* [", title, "](vignettes/", file, "): `vignette(\"", vignette_name, "\", package=\"GillespieSSA\")`\n",
+      sep = ""
+    )
+  }
+)
+```
+
+```{r rerun_vignettes, include = FALSE}
+rerun_vignettes <- FALSE
+if (rerun_vignettes) {
+  for (file in list.files("vignettes", pattern = "*.Rmd", full.names = TRUE)) {
+    cat("Running '", file, "'\n", sep = "")
+    rmarkdown::render(file, output_format = "github_document")
+  }
+}
+```
 
 ## Latest changes
 

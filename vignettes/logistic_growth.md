@@ -1,4 +1,4 @@
-Logistic growth (Pearl-Verhulst model) (Kot, 2001)
+Pearl-Verhulst Logistic growth model (Kot, 2001)
 ================
 
 <!-- github markdown built using 
@@ -31,7 +31,7 @@ Define parameters
 
 ``` r
 parms <- c(b = 2, d = 1, K = 1000)      # Parameters
-tf <- 10                          # Final time
+tf <- 10                                # Final time
 simName <- "Logistic growth" 
 ```
 
