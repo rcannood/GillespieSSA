@@ -31,7 +31,6 @@
 #' @keywords misc datagen ts device utilities hplot
 #'
 #' @examples
-#' \dontrun{
 #' ## Define the Kermack-McKendrick SIR model and run once using the Direct method
 #' parms <- c(beta=.001, gamma=.100)
 #' x0 <- c(S=500, I=1, R=0)                      # Initial state vector
@@ -40,34 +39,12 @@
 #' tf <- 100                                     # Final time
 #' simName <- "Kermack-McKendrick SIR"
 #' out <- ssa(x0,a,nu,parms,tf,method="D",simName,verbose=TRUE,consoleInterval=1)
-#' }
-#' \dontrun{
+#'
 #' ## Basic ssa plot
 #' ssa.plot(out)
-#' }
-#' \dontrun{
+#'
 #' # Plot only the infectious class
 #' ssa.plot(out,plot.from=3,plot.to=3)
-#' }
-#' \dontrun{
-#' ## Multipanel plot using different SSA methods
-#' layout(matrix(seq(4),ncol=4,byrow=TRUE))
-#'
-#' ## Using the Direct method
-#' ssa.plot(out)
-#'
-#' ## Run and plot results using the ETL method
-#' out <- ssa(x0,a,nu,parms,tf=100,method="ETL",simName="Kermack-McKendrick SIR")
-#' ssa.plot(out,show.title=FALSE,show.legend=FALSE)
-#'
-#' ## Run and plot results using the BTL method
-#' out <- ssa(x0,a,nu,parms,tf=100,method="BTL",simName="Kermack-McKendrick SIR")
-#' ssa.plot(out,show.title=FALSE,show.legend=FALSE)
-#'
-#' ## Run and plot results using the OTL method
-#' out <- ssa(x0,a,nu,parms,tf=100,method="OTL",simName="Kermack-McKendrick SIR")
-#' ssa.plot(out,show.title=FALSE,show.legend=FALSE)
-#' }
 #'
 #' @importFrom grDevices rainbow
 #' @importFrom graphics matplot title mtext legend
