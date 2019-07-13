@@ -254,8 +254,24 @@ ssa <- function(
   verbose = FALSE,
   maxWallTime = Inf
 ) {
-
-  ssa.check.args(x0,a,nu,tf,method,tau,f,epsilon,nc,hor,dtf,nd,ignoreNegativeState,consoleInterval,censusInterval,verbose)
+  ssa.check.args(
+    x0 = x0,
+    a = a,
+    nu = nu,
+    tf = tf,
+    method = method,
+    tau = tau,
+    f = f,
+    epsilon = epsilon,
+    nc = nc,
+    hor = hor,
+    dtf = dtf,
+    nd = nd,
+    ignoreNegativeState = ignoreNegativeState,
+    consoleInterval = consoleInterval,
+    censusInterval = censusInterval,
+    verbose = verbose
+  )
 
   # Convert lower case method names to upper case (undocumented featurette)
   if (method=="d")   method <- "D"
@@ -263,7 +279,14 @@ ssa <- function(
   if (method=="btl") method <- "BTL"
   if (method=="otl") method <- "OTL"
 
-  ssa.check.method(x0,a,nu,method,tau,f)
+  ssa.check.method(
+    x0 = x0,
+    a = a,
+    nu = nu,
+    method = method,
+    tau = tau,
+    f = f
+  )
 
   # Is the system nu-tiled along the diagonal?
   if (length(a) > ncol(nu) && length(x0) > nrow(nu)){
