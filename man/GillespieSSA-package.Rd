@@ -96,16 +96,6 @@ Kermack-McKendrick SIR model (Brown & Rothery, 1993)\cr
 }
 }
 
-\section{How to cite this package}{
-
-\preformatted{
-  author = Mario Pineda-Krch
-  title  = GillespieSSA: a stochastic simulation package for R
-  year   = 2010
-  url    = http://pineda-krch.com/gillespiessa
-}
-}
-
 \section{Acknowledgements}{
 
 \itemize{
@@ -120,12 +110,12 @@ Kermack-McKendrick SIR model (Brown & Rothery, 1993)\cr
 \references{
 \itemize{
 \item Brown D. and Rothery P. 1993. Models in biology: mathematics, statistics, and computing. John Wiley & Sons.
-\item Cao Y., Li H., and Petzold L. 2004. Efficient formulation of the stochastic simulation algorithm for chemically reacting systems. J. Chem. Phys. 121:4059-4067. <http://dx.doi.org/10.1063/1.1778376 >
+\item Cao Y., Li H., and Petzold L. 2004. Efficient formulation of the stochastic simulation algorithm for chemically reacting systems. J. Chem. Phys. 121:4059-4067. \url{http://dx.doi.org/10.1063/1.1778376}
 \item Cao Y., Gillespie D.T., and Petzold L.R. 2006. Efficient step size selection for the tau-leaping method. J. Chem. Phys. 124:044109. \url{http://dx.doi.org/10.1063/1.2159468}
-\item Cao Y., Gillespie D.T., and Petzold L.R. 2007. Adaptive explicit tau-leap method with automatic tau selection. J. Chem. Phys. 126:224101. <http://dx.doi.org/10.1063/1.2745299 >
+\item Cao Y., Gillespie D.T., and Petzold L.R. 2007. Adaptive explicit tau-leap method with automatic tau selection. J. Chem. Phys. 126:224101. \url{http://dx.doi.org/10.1063/1.2745299}
 \item Chatterjee A., Vlachos D.G., and Katsoulakis M.A. 2005. Binomial distribution based tau-leap accelerated stochastic simulation. J. Chem. Phys. 122:024112. \url{http://dx.doi.org/10.1063/1.1833357}
 \item Gillespie D.T. 1977. Exact stochastic simulation of coupled chemical reactions. J. Phys. Chem. 81:2340. \url{http://dx.doi.org/10.1021/j100540a008}
-\item Gillespie D.T. 2001. Approximate accelerated stochastic simulation of chemically reacting systems. J. Chem. Phys. 115:1716-1733. <http://dx.doi.org/10.1063/1.1378322 >
+\item Gillespie D.T. 2001. Approximate accelerated stochastic simulation of chemically reacting systems. J. Chem. Phys. 115:1716-1733. \url{http://dx.doi.org/10.1063/1.1378322}
 \item Gillespie D.T. 2007. Stochastic simulation of chemical kinetics. Annu. Rev. Chem. 58:35 \url{http://dx.doi.org/10.1146/annurev.physchem.58.032806.104637}
 \item Kot M. 2001. Elements of mathematical ecology. Cambridge University Press. \url{http://dx.doi.org/10.1017/CBO9780511608520}
 \item Pineda-Krch M. 2008. Implementing the stochastic simulation algorithm in R. Journal of Statistical Software 25(12): 1-18. \url{http://dx.doi.org/10.18637/jss.v025.i12}
