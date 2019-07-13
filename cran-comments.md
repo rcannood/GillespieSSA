@@ -1,20 +1,26 @@
-One of our lab's project is closely related to this 
+One of our lab's projects is closely related to this 
 package. As such, I would like to provide custody to
 this package in order to ensure it is well maintained
-over time.
+over time. 
 
-Current improvements are simply refactorisations in 
-order to update the code to modern R standards. 
+Special care will be taken to ensure the interface of the package
+remains the unchanged, as not to break the package for legacy users.
 
-Future improvements include:
+## List of changes
+* DOCUMENTATION: Documentation was roxygenised and markdownised.
 
-* Major speed-ups due to the way code is currently evaluated
-  at run-time.
-* Avoid using the environment of `ssa.run()` in order to
-  store the algorithms state vector.
+* DOCUMENTATION: Port demo's to vignettes.
 
-These improvements will be made whilst keeping the
-interface of the package fixed as not to break legacy users.
+* DOCUMENTATION: Added NEWS and README.
+
+* DOCUMENTATION: Remove \dontrun's from examples.
+
+* MINOR CHANGE: Many functions were refactorised in order to clean up the code.
+
+* MINOR CHANGE: Functions which are marked "Not intended to be invoked stand alone."
+  are no longer being exported.
+
+* BUG FIX: Fix warning and potential error in OTL.
 
 ## Test environments
 * local Fedora install, R 3.6.0
@@ -36,3 +42,19 @@ suggest alternatives.
 ## R CMD check results
 
 0 errors | 0 warnings | 0 note
+
+## Revdepcheck
+
+revdepcheck was run with the following command:
+```
+revdepcheck::revdep_check()
+```
+
+It resulted in no new errors or warnings for reverse dependencies.
+
+```
+✔ hybridModels 0.3.5                     ── E: 0     | W: 0     | N: 0                                                   
+OK: 1                                                                                                                  
+BROKEN: 0
+Total time: 5 min
+```
