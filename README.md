@@ -40,28 +40,27 @@ devtools::install_github("rcannood/GillespieSSA", build_vignettes = TRUE)
 The following example models are available:
 
   - [Decaying-Dimerization Reaction Set (Gillespie,
-    2001)](vignettes/decaying_dimer.Rmd): `vignette("decaying_dimer",
+    2001)](vignettes/decaying_dimer.md): `vignette("decaying_dimer",
     package="GillespieSSA")`
   - [SIRS metapopulation model (Pineda-Krch,
-    2008)](vignettes/epi_chain.Rmd): `vignette("epi_chain",
+    2008)](vignettes/epi_chain.md): `vignette("epi_chain",
     package="GillespieSSA")`
-  - [Linear Chain System (Cao et al.,
-    2004)](vignettes/linear_chain.Rmd): `vignette("linear_chain",
-    package="GillespieSSA")`
+  - [Linear Chain System (Cao et al., 2004)](vignettes/linear_chain.md):
+    `vignette("linear_chain", package="GillespieSSA")`
   - [Pearl-Verhulst Logistic growth model (Kot,
-    2001)](vignettes/logistic_growth.Rmd): `vignette("logistic_growth",
+    2001)](vignettes/logistic_growth.md): `vignette("logistic_growth",
     package="GillespieSSA")`
   - [Lotka predator-prey model (Gillespie, 1977; Kot,
-    2001)](vignettes/lotka_predator_prey.Rmd):
+    2001)](vignettes/lotka_predator_prey.md):
     `vignette("lotka_predator_prey", package="GillespieSSA")`
   - [Radioactive decay model (Gillespie,
-    1977)](vignettes/radioactive_decay.Rmd):
+    1977)](vignettes/radioactive_decay.md):
     `vignette("radioactive_decay", package="GillespieSSA")`
   - [Rosenzweig-MacArthur predator-prey model (Pineda-Krch et al.,
-    2007)](vignettes/rm_predator_prey.Rmd):
-    `vignette("rm_predator_prey", package="GillespieSSA")`
+    2007)](vignettes/rm_predator_prey.md): `vignette("rm_predator_prey",
+    package="GillespieSSA")`
   - [Kermack-McKendrick SIR model (Brown & Rothery,
-    1993)](vignettes/sir.Rmd): `vignette("sir", package="GillespieSSA")`
+    1993)](vignettes/sir.md): `vignette("sir", package="GillespieSSA")`
 
 ## Latest changes
 
