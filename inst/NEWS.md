@@ -1,10 +1,4 @@
-# GillespieSSA 0.6.1 (unreleased)
-
-* DOCUMENTATION: Remove \dontrun's from examples.
-
-* BUG FIX: Fix examples.
-
-# GillespieSSA 0.6.0 (2019-07-12)
+# GillespieSSA 0.6.0 (unreleased)
 
 * MAINTAINER: Maintainer has been changed to Robrecht Cannoodt.
 
@@ -12,8 +6,16 @@
 
 * DOCUMENTATION: Added NEWS and README.
 
+* MINOR CHANGE: Many functions were refactorised in order to clean up the code.
+
 * MINOR CHANGE: Functions which are marked "Not intended to be invoked stand alone."
   are no longer being exported.
+  
+* DOCUMENTATION: Remove \dontrun's from examples.
+
+* BUG FIX: Fix warning and potential error in OTL.
+
+* DOCUMENTATION: Port demo's to vignettes.
   
 # GillespieSSA 0.5-4 (2010-08-16)
 
