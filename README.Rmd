@@ -47,7 +47,7 @@ devtools::install_github("rcannood/GillespieSSA", build_vignettes = TRUE)
 
 The following example models are available:
 
-```{r vignettes, results='asis'}
+```{r vignettes, results='asis', echo=FALSE}
 walk(
   list.files("vignettes", pattern = "*.Rmd"),
   function(file) {

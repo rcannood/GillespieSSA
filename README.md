@@ -2,7 +2,6 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 <a href="https://travis-ci.org/rcannood/GillespieSSA"><img src="https://travis-ci.org/rcannood/GillespieSSA.svg" align="left"></a>
-<a href="https://codecov.io/gh/rcannood/GillespieSSA">
 
 # `GillespieSSA`: Gillespie’s Stochastic Simulation Algorithm (SSA)
 
@@ -39,23 +38,6 @@ devtools::install_github("rcannood/GillespieSSA", build_vignettes = TRUE)
 ## Examples
 
 The following example models are available:
-
-``` r
-walk(
-  list.files("vignettes", pattern = "*.Rmd"),
-  function(file) {
-    title <- 
-      read_lines(paste0("vignettes/", file)) %>% 
-      keep(~grepl("^title: ", .)) %>% 
-      gsub("title: \"(.*)\"", "\\1", .)
-    vignette_name <- gsub("\\.Rmd", "", file)
-    cat(
-      "* [", title, "](vignettes/", file, "): `vignette(\"", vignette_name, "\", package=\"GillespieSSA\")`\n",
-      sep = ""
-    )
-  }
-)
-```
 
   - [Decaying-Dimerization Reaction Set (Gillespie,
     2001)](vignettes/decaying_dimer.Rmd): `vignette("decaying_dimer",
