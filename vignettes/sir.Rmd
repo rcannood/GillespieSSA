@@ -50,7 +50,7 @@ x0 <- c(S=500, I=1, R=0)
 
 Define state-change matrix
 ```{r}
-nu <- matrix(c(-1,0,1,-1,0,1),nrow=3,byrow=T)
+nu <- matrix(c(-1,0,1,-1,0,1),nrow=3,byrow=TRUE)
 ```
 
 Define propensity functions

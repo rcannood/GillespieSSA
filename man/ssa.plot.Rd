@@ -51,10 +51,10 @@ time steps executed, and the number of time steps per data point.
 \examples{
 ## Define the Kermack-McKendrick SIR model and run once using the Direct method
 parms <- c(beta=.001, gamma=.100)
-x0 <- c(S=500, I=1, R=0)                      # Initial state vector
-nu <- matrix(c(-1,0,1,-1,0,1),nrow=3,byrow=T) # State-change matrix
-a  <- c("beta*S*I", "gamma*I")                # Propensity vector
-tf <- 100                                     # Final time
+x0 <- c(S=500, I=1, R=0)                         # Initial state vector
+nu <- matrix(c(-1,0,1,-1,0,1),nrow=3,byrow=TRUE) # State-change matrix
+a  <- c("beta*S*I", "gamma*I")                   # Propensity vector
+tf <- 100                                        # Final time
 simName <- "Kermack-McKendrick SIR"
 out <- ssa(x0,a,nu,parms,tf,method="D",simName,verbose=TRUE,consoleInterval=1)
 
