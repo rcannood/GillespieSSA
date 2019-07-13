@@ -72,7 +72,7 @@ ssa.otl.diag <- function(
 
     # Define mu ($\hat{\mu$}_i(\matnbf{x}) in Eq. 32a)
     # Define sigma ($\hat{\sigma}^2_i(\mathbf{x})$ in Eq. 32b)
-    nu_reacting <- nu[apply(nu, 1, function(x) any(x != 0)), , drop = FALSE] # Remove non-reacting species from nu
+    nu_reacting <- nu_tile[apply(nu_tile, 1, function(x) any(x != 0)), , drop = FALSE] # Remove non-reacting species from nu
     mu <- NULL
     sigmaSq <- NULL
     for(f in (seq(U)-1)) {
