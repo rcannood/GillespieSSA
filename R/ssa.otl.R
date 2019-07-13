@@ -60,7 +60,6 @@ ssa.otl <- function(
   dtf = stop("missing direct method threshold factor (dtf)"),
   nd = stop("missing OTL suspension duration parameter (nd)")
 ) {
-
   verbose <- FALSE
   if (verbose) cat("Starting OTL...\n")
 
@@ -91,7 +90,7 @@ ssa.otl <- function(
     g[hor==22] <- (2+1/(x[hor==2]-1)) # Intraspecific second-order reaction (S1+S1->...)
 
     # Define mu ($\hat{\mu$}_i(\matnbf{x}) in Eq. 32a)
-    tmp_nu <- matrix(nu[apply(nu,1,any)],ncol=dim(nu)[2]) # Remove non-reacting species from nu
+    tmp_nu <- nu[apply(nu, 1, function(x) any(x != 0)), , drop = FALSE] # Remove non-reacting species from nu
     tmp <- tmp_nu[,Jncr]*a[Jncr]
     if (is.matrix(tmp)) mu <- rowSums(tmp)
     else mu <- tmp
