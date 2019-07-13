@@ -1,4 +1,4 @@
-SIRS metapopulation model
+SIRS metapopulation model (Pineda-Krch, 2008)
 ================
 
 <!-- github markdown built using 
@@ -17,14 +17,18 @@ library(GillespieSSA)
 Define parameters
 
 ``` r
-patchPopSize <- 500 # Patch size
-U <- 20 # Number of patches
+patchPopSize <- 500                    # Patch size
+U <- 20                                # Number of patches
+simName <- "SIRS metapopulation model" # Simulation name
+tf <- 50                               # Final time
 
-parms <- c(beta = 0.001, # Transmission rate
-          gamma = 0.1,   # Recovery rate
-            rho = 0.005, # Loss of immunity rate
-        epsilon = 0.01,  # Proportion inter-patch transmissions
-              N = patchPopSize) # Patch population size (constant)
+parms <- c(
+  beta = 0.001,                        # Transmission rate
+  gamma = 0.1,                         # Recovery rate
+  rho = 0.005,                         # Loss of immunity rate
+  epsilon = 0.01,                      # Proportion inter-patch transmissions
+  N = patchPopSize                     # Patch population size (constant)
+) 
 ```
 
 Create the named initial state vector for the U-patch system. The
@@ -69,18 +73,6 @@ a <- unlist(lapply(
     )
   }
 ))
-```
-
-Final time
-
-``` r
-tf <- 50
-```
-
-Simulation name
-
-``` r
-simName <- "SIRS metapopulation model"
 ```
 
 Run simulations with the Direct method

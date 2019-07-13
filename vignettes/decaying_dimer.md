@@ -1,12 +1,12 @@
-Decaying-Dimerization Reaction Set
+Decaying-Dimerization Reaction Set (Gillespie, 2001)
 ================
 
 <!-- github markdown built using 
 rmarkdown::render("vignettes/decaying_dimer.Rmd", output_format = "github_document")
 -->
 
-The Decaying-Dimerization Reaction Set (Gillespie, 2001) consists of
-three species and four reaction channels.
+The Decaying-Dimerization Reaction Set consists of three species and
+four reaction channels.
 
 ``` 
       S1 --c1--> 0
@@ -25,6 +25,8 @@ Define parameters
 
 ``` r
 parms <- c(c1=1.0, c2=0.002, c3=0.5, c4=0.04)
+tf <- 10                                       # Final time
+simName <- "Decaying-Dimerizing Reaction Set"  # Name
 ```
 
 Define initial state vector
@@ -46,18 +48,6 @@ Define propensity functions
 
 ``` r
 a  <- c("c1*s1", "c2*s1*s1", "c3*s2", "c4*s2")
-```
-
-Final time
-
-``` r
-tf <- 10
-```
-
-Simulation name
-
-``` r
-simName <- "Decaying-Dimerizing Reaction Set"
 ```
 
 Run simulations with the Direct method
