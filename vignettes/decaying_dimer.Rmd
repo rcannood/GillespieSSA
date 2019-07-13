@@ -15,9 +15,10 @@ rmarkdown::render("vignettes/decaying_dimer.Rmd", output_format = "github_docume
 
 ```{r, setseed, echo=FALSE}
 set.seed(1)
+knitr::opts_chunk$set(fig.width = 8, fig.height = 6)
 ```
 
-The Decaying-Dimerization Reaction Set consists of three species and four reaction channels,
+The Decaying-Dimerization Reaction Set (Gillespie, 2001) consists of three species and four reaction channels.
 
 ```
       S1 --c1--> 0
@@ -75,7 +76,7 @@ out <- ssa(
   tf = tf,
   method = "D",
   simName = simName,
-  verbose = TRUE,
+  verbose = FALSE,
   consoleInterval = 1
 ) 
 ssa.plot(out, show.title = TRUE, show.legend = FALSE)
@@ -93,7 +94,7 @@ out <- ssa(
   method = "ETL",
   tau = 0.003,
   simName = simName,
-  verbose = TRUE,
+  verbose = FALSE,
   consoleInterval = 1
 ) 
 ssa.plot(out, show.title = TRUE, show.legend = FALSE)
@@ -110,7 +111,7 @@ out <- ssa(
   tf = tf,
   method = "BTL",
   simName = simName,
-  verbose = TRUE,
+  verbose = FALSE,
   consoleInterval = 1
 ) 
 ssa.plot(out, show.title = TRUE, show.legend = FALSE)
@@ -127,7 +128,7 @@ out <- ssa(
   tf = tf,
   method = "OTL",
   simName = simName,
-  verbose = TRUE,
+  verbose = FALSE,
   consoleInterval = 1
 ) 
 ssa.plot(out, show.title = TRUE, show.legend = FALSE)
