@@ -118,7 +118,7 @@ changes.
     [doi:10.1021/j100540a008](http://dx.doi.org/10.1021/j100540a008)
   - Gillespie D.T. 2001. Approximate accelerated stochastic simulation
     of chemically reacting systems. J. Chem. Phys. 115:1716-1733.
-    \<<http://dx.doi.org/10.1063/1.1378322> \>
+    [doi:10.1063/1.1378322](http://dx.doi.org/10.1063/1.1378322)
   - Gillespie D.T. 2007. Stochastic simulation of chemical kinetics.
     Annu. Rev. Chem. 58:35
     [doi:10.1146/annurev.physchem.58.032806.104637](http://dx.doi.org/10.1146/annurev.physchem.58.032806.104637)

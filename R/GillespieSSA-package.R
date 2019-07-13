@@ -75,46 +75,39 @@
 #'
 #' \tabular{l}{
 #'   Decaying-Dimerization Reaction Set (Gillespie, 2001)\cr
-#'   `file.show(system.file("demo/decayingDimer.R", package = "GillespieSSA"))` \cr
+#'   `vignette("decaying_dimer", package = "GillespieSSA")` \cr
 #'   \cr
-#'   Metapopulation SIRS model (Pineda-Krch, 2008)\cr
-#'   `file.show(system.file("demo/epiChain.R", package = "GillespieSSA"))` \cr
+#'   SIRS metapopulation model (Pineda-Krch, 2008)\cr
+#'   `vignette("epi_chain", package = "GillespieSSA")` \cr
 #'   \cr
 #'   Linear Chain System (Cao et al., 2004)\cr
-#'   `file.show(system.file("demo/linearChain.R", package = "GillespieSSA"))` \cr
+#'   `vignette("linear_chain", package = "GillespieSSA")` \cr
 #'   \cr
-#'   Logistic growth (Pearl-Verhulst model) (Kot, 2001, Pineda-Krch, 2008) \cr
-#'   `file.show(system.file("demo/logisticGrowth.R", package = "GillespieSSA"))` \cr
+#'   Pearl-Verhulst Logistic growth model (Kot, 2001, Pineda-Krch, 2008) \cr
+#'   `vignette("logistic_growth", package = "GillespieSSA")` \cr
 #'   \cr
 #'   Lotka predator-prey model (Gillespie, 1977; Kot, 2001)\cr
-#'   `file.show(system.file("demo/lotka.R", package = "GillespieSSA"))` \cr
+#'   `vignette("lotka_predator_prey", package = "GillespieSSA")` \cr
 #'   \cr
 #'   Radioactive decay model (Gillespie, 1977)\cr
-#'   `file.show(system.file("demo/radioactiveDecay.R", package = "GillespieSSA"))` \cr
+#'   `vignette("radioactive_decay", package = "GillespieSSA")` \cr
 #'   \cr
 #'   Rosenzweig-MacArthur predator-prey model (Pineda-Krch et al., 2007, Pineda-Krch, 2008) \cr
-#'   `file.show(system.file("demo/rma.R", package = "GillespieSSA"))` \cr
+#'   `vignette("rm_predator_prey", package = "GillespieSSA")` \cr
 #'   \cr
 #'   Kermack-McKendrick SIR model (Brown & Rothery, 1993)\cr
-#'   `file.show(system.file("demo/sir.R", package = "GillespieSSA"))` \cr
+#'   `vignette("sir", package = "GillespieSSA")` \cr
 #'   \cr
-#' }
-#' @section How to cite this package:
-#' \preformatted{
-#'   author = Mario Pineda-Krch
-#'   title  = GillespieSSA: a stochastic simulation package for R
-#'   year   = 2010
-#'   url    = http://pineda-krch.com/gillespiessa
 #' }
 #'
 #' @references
 #'  * Brown D. and Rothery P. 1993. Models in biology: mathematics, statistics, and computing. John Wiley & Sons.
-#'  * Cao Y., Li H., and Petzold L. 2004. Efficient formulation of the stochastic simulation algorithm for chemically reacting systems. J. Chem. Phys. 121:4059-4067. <http://dx.doi.org/10.1063/1.1778376 >
+#'  * Cao Y., Li H., and Petzold L. 2004. Efficient formulation of the stochastic simulation algorithm for chemically reacting systems. J. Chem. Phys. 121:4059-4067. <http://dx.doi.org/10.1063/1.1778376>
 #'  * Cao Y., Gillespie D.T., and Petzold L.R. 2006. Efficient step size selection for the tau-leaping method. J. Chem. Phys. 124:044109. <http://dx.doi.org/10.1063/1.2159468>
-#'  * Cao Y., Gillespie D.T., and Petzold L.R. 2007. Adaptive explicit tau-leap method with automatic tau selection. J. Chem. Phys. 126:224101. <http://dx.doi.org/10.1063/1.2745299 >
+#'  * Cao Y., Gillespie D.T., and Petzold L.R. 2007. Adaptive explicit tau-leap method with automatic tau selection. J. Chem. Phys. 126:224101. <http://dx.doi.org/10.1063/1.2745299>
 #'  * Chatterjee A., Vlachos D.G., and Katsoulakis M.A. 2005. Binomial distribution based tau-leap accelerated stochastic simulation. J. Chem. Phys. 122:024112. <http://dx.doi.org/10.1063/1.1833357>
 #'  * Gillespie D.T. 1977. Exact stochastic simulation of coupled chemical reactions. J. Phys. Chem. 81:2340. <http://dx.doi.org/10.1021/j100540a008>
-#'  * Gillespie D.T. 2001. Approximate accelerated stochastic simulation of chemically reacting systems. J. Chem. Phys. 115:1716-1733. <http://dx.doi.org/10.1063/1.1378322 >
+#'  * Gillespie D.T. 2001. Approximate accelerated stochastic simulation of chemically reacting systems. J. Chem. Phys. 115:1716-1733. <http://dx.doi.org/10.1063/1.1378322>
 #'  * Gillespie D.T. 2007. Stochastic simulation of chemical kinetics. Annu. Rev. Chem. 58:35 <http://dx.doi.org/10.1146/annurev.physchem.58.032806.104637>
 #'  * Kot M. 2001. Elements of mathematical ecology. Cambridge University Press. <http://dx.doi.org/10.1017/CBO9780511608520>
 #'  * Pineda-Krch M. 2008. Implementing the stochastic simulation algorithm in R. Journal of Statistical Software 25(12): 1-18. <http://dx.doi.org/10.18637/jss.v025.i12>
