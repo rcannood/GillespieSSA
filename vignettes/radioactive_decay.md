@@ -1,19 +1,14 @@
-Linear Chain System (Cao et al., 2004)
+Radioactive decay model (Gillespie, 1977)
 ================
 
 <!-- github markdown built using 
-rmarkdown::render("vignettes/linear_chain.Rmd", output_format = "github_document")
+rmarkdown::render("vignettes/radioactive_decay.Rmd", output_format = "github_document")
 -->
 
-The Linear Chain System consists of M chain reactions with M+1 species
-as follows:
+This model is also known as the irreversible isomerization reaction set.
+It consists of a single species and single reaction channels,
 
-``` 
-  S_1 --c1--> S_2
-  S_2 --c2--> S_3
-       ...
-  S_M --cM--> S_(M+1)
-```
+    X --c--> 0
 
 Load package
 
@@ -24,31 +19,27 @@ library(GillespieSSA)
 Define parameters
 
 ``` r
-parms <- c(c = 1)                # Rate parameter
-M <- 50                          # Number of chain reactions
-simName <- "Linear Chain System" # Simulation name
-tf <- 5                          # Final time
+parms <- c(k = 0.5)
+tf <- 20                                       # Final time
+simName <- "Radioactive decay model"
 ```
 
 Define initial state vector
 
 ``` r
-x0 <- c(1000, rep(0, M)) 
-names(x0) <- paste0("x", seq_len(M+1))
+x0 <- c(N=1000)
 ```
 
 Define state-change matrix
 
 ``` r
-nu <- matrix(rep(0, M * (M+1)), ncol = M)
-nu[cbind(seq_len(M), seq_len(M))] <- -1
-nu[cbind(seq_len(M)+1, seq_len(M))] <- 1
+nu <- matrix(c(-1),nrow=1,byrow=TRUE)
 ```
 
 Define propensity functions
 
 ``` r
-a <- paste0("c*x", seq_len(M))
+a <- c("k*N")
 ```
 
 Run simulations with the Direct method
@@ -69,7 +60,7 @@ out <- ssa(
 ssa.plot(out, show.title = TRUE, show.legend = FALSE)
 ```
 
-![](linear_chain_files/figure-gfm/direct-1.png)<!-- -->
+![](radioactive_decay_files/figure-gfm/direct-1.png)<!-- -->
 
 Run simulations with the Explict tau-leap method
 
@@ -82,7 +73,7 @@ out <- ssa(
   parms = parms,
   tf = tf,
   method = "ETL",
-  tau = .1,
+  tau = 0.003,
   simName = simName,
   verbose = FALSE,
   consoleInterval = 1
@@ -90,7 +81,7 @@ out <- ssa(
 ssa.plot(out, show.title = TRUE, show.legend = FALSE)
 ```
 
-![](linear_chain_files/figure-gfm/etl-1.png)<!-- -->
+![](radioactive_decay_files/figure-gfm/etl-1.png)<!-- -->
 
 Run simulations with the Binomial tau-leap method
 
@@ -103,7 +94,6 @@ out <- ssa(
   parms = parms,
   tf = tf,
   method = "BTL",
-  f = 50,
   simName = simName,
   verbose = FALSE,
   consoleInterval = 1
@@ -111,7 +101,7 @@ out <- ssa(
 ssa.plot(out, show.title = TRUE, show.legend = FALSE)
 ```
 
-![](linear_chain_files/figure-gfm/btl-1.png)<!-- -->
+![](radioactive_decay_files/figure-gfm/btl-1.png)<!-- -->
 
 Run simulations with the Optimized tau-leap method
 
@@ -131,4 +121,4 @@ out <- ssa(
 ssa.plot(out, show.title = TRUE, show.legend = FALSE)
 ```
 
-![](linear_chain_files/figure-gfm/otl-1.png)<!-- -->
+![](radioactive_decay_files/figure-gfm/otl-1.png)<!-- -->

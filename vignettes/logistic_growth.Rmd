@@ -1,59 +1,67 @@
-Linear Chain System (Cao et al., 2004)
-================
+---
+title: "Logistic growth (Pearl-Verhulst model) (Kot, 2001)"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Logistic growth (Pearl-Verhulst model) (Kot, 2001)}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
 
 <!-- github markdown built using 
-rmarkdown::render("vignettes/linear_chain.Rmd", output_format = "github_document")
+rmarkdown::render("vignettes/logistic_growth.Rmd", output_format = "github_document")
 -->
 
-The Linear Chain System consists of M chain reactions with M+1 species
-as follows:
-
-``` 
-  S_1 --c1--> S_2
-  S_2 --c2--> S_3
-       ...
-  S_M --cM--> S_(M+1)
+```{r, setseed, echo=FALSE}
+set.seed(1)
+knitr::opts_chunk$set(fig.width = 8, fig.height = 6)
 ```
 
-Load package
+The logistic growth model is given by `dN/dt = rN(1-N/K)` where
+`N` is the number (density) of indviduals at time `t`, 
+`K` is the carrying capacity of the population, 
+`r` is the intrinsic growth rate of the population. 
+We assume `r=b-d` where 
+`b` is the per capita p.c. birth rate and 
+`d` is the p.c. death rate. 
 
-``` r
+This model consists of two reaction channels,
+```
+ N ---b--->  N + N
+ N ---d'---> 0
+```
+where `d'=d+(b-d)N/K`. The propensity functions are `a_1=bN` and `a_2=d'N`.
+
+Load package
+```{r}
 library(GillespieSSA)
 ```
 
 Define parameters
-
-``` r
-parms <- c(c = 1)                # Rate parameter
-M <- 50                          # Number of chain reactions
-simName <- "Linear Chain System" # Simulation name
-tf <- 5                          # Final time
+```{r}
+parms <- c(b = 2, d = 1, K = 1000)      # Parameters
+tf <- 10                                # Final time
+simName <- "Logistic growth" 
 ```
 
 Define initial state vector
-
-``` r
-x0 <- c(1000, rep(0, M)) 
-names(x0) <- paste0("x", seq_len(M+1))
+```{r}
+x0 <- c(N = 500)
 ```
 
 Define state-change matrix
-
-``` r
-nu <- matrix(rep(0, M * (M+1)), ncol = M)
-nu[cbind(seq_len(M), seq_len(M))] <- -1
-nu[cbind(seq_len(M)+1, seq_len(M))] <- 1
+```{r}
+nu <- matrix(c(+1, -1),ncol = 2)
 ```
 
 Define propensity functions
-
-``` r
-a <- paste0("c*x", seq_len(M))
+```{r}
+a  <- c("b*N", "(d+(b-d)*N/K)*N")
 ```
 
 Run simulations with the Direct method
-
-``` r
+```{r direct}
 set.seed(1)
 out <- ssa(
   x0 = x0,
@@ -69,11 +77,8 @@ out <- ssa(
 ssa.plot(out, show.title = TRUE, show.legend = FALSE)
 ```
 
-![](linear_chain_files/figure-gfm/direct-1.png)<!-- -->
-
 Run simulations with the Explict tau-leap method
-
-``` r
+```{r etl}
 set.seed(1)
 out <- ssa(
   x0 = x0,
@@ -82,7 +87,7 @@ out <- ssa(
   parms = parms,
   tf = tf,
   method = "ETL",
-  tau = .1,
+  tau = .03,
   simName = simName,
   verbose = FALSE,
   consoleInterval = 1
@@ -90,11 +95,8 @@ out <- ssa(
 ssa.plot(out, show.title = TRUE, show.legend = FALSE)
 ```
 
-![](linear_chain_files/figure-gfm/etl-1.png)<!-- -->
-
 Run simulations with the Binomial tau-leap method
-
-``` r
+```{r btl}
 set.seed(1)
 out <- ssa(
   x0 = x0,
@@ -103,7 +105,7 @@ out <- ssa(
   parms = parms,
   tf = tf,
   method = "BTL",
-  f = 50,
+  f = 5,
   simName = simName,
   verbose = FALSE,
   consoleInterval = 1
@@ -111,11 +113,8 @@ out <- ssa(
 ssa.plot(out, show.title = TRUE, show.legend = FALSE)
 ```
 
-![](linear_chain_files/figure-gfm/btl-1.png)<!-- -->
-
 Run simulations with the Optimized tau-leap method
-
-``` r
+```{r otl}
 set.seed(1)
 out <- ssa(
   x0 = x0,
@@ -130,5 +129,3 @@ out <- ssa(
 ) 
 ssa.plot(out, show.title = TRUE, show.legend = FALSE)
 ```
-
-![](linear_chain_files/figure-gfm/otl-1.png)<!-- -->

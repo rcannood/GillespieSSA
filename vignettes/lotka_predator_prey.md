@@ -1,18 +1,21 @@
-Linear Chain System (Cao et al., 2004)
+Lotka predator-prey model (Gillespie, 1977; Kot, 2001)
 ================
 
 <!-- github markdown built using 
-rmarkdown::render("vignettes/linear_chain.Rmd", output_format = "github_document")
+rmarkdown::render("vignettes/lotka_predator_prey.Rmd", output_format = "github_document")
 -->
 
-The Linear Chain System consists of M chain reactions with M+1 species
-as follows:
+This version of the Lotka predator-prey model is given by
+
+    dY1/dt = c1*Y1 - c2*Y1*Y2
+    dY2/dt = c2*Y1*Y2 - c3*Y2
+
+consisting of the three reaction channels,
 
 ``` 
-  S_1 --c1--> S_2
-  S_2 --c2--> S_3
-       ...
-  S_M --cM--> S_(M+1)
+      Y1 --c1--> Y1 + Y1 
+ Y1 + Y2 --c2--> Y2 + Y2 
+      Y1 --c3--> 0
 ```
 
 Load package
@@ -24,31 +27,27 @@ library(GillespieSSA)
 Define parameters
 
 ``` r
-parms <- c(c = 1)                # Rate parameter
-M <- 50                          # Number of chain reactions
-simName <- "Linear Chain System" # Simulation name
-tf <- 5                          # Final time
+parms <- c(c1 = 10, c2 = .01, c3 = 10)
+tf <- 2                                        # Final time
+simName <- "Lotka predator-prey model"         # Name
 ```
 
 Define initial state vector
 
 ``` r
-x0 <- c(1000, rep(0, M)) 
-names(x0) <- paste0("x", seq_len(M+1))
+x0 <- c(Y1=1000, Y2=1000)
 ```
 
 Define state-change matrix
 
 ``` r
-nu <- matrix(rep(0, M * (M+1)), ncol = M)
-nu[cbind(seq_len(M), seq_len(M))] <- -1
-nu[cbind(seq_len(M)+1, seq_len(M))] <- 1
+nu <- matrix(c(+1, -1, 0, 0, 1, -1), nrow = 2, byrow = TRUE)
 ```
 
 Define propensity functions
 
 ``` r
-a <- paste0("c*x", seq_len(M))
+a  <- c("c1*Y1", "c2*Y1*Y2","c3*Y2")
 ```
 
 Run simulations with the Direct method
@@ -69,7 +68,7 @@ out <- ssa(
 ssa.plot(out, show.title = TRUE, show.legend = FALSE)
 ```
 
-![](linear_chain_files/figure-gfm/direct-1.png)<!-- -->
+![](lotka_predator_prey_files/figure-gfm/direct-1.png)<!-- -->
 
 Run simulations with the Explict tau-leap method
 
@@ -82,7 +81,7 @@ out <- ssa(
   parms = parms,
   tf = tf,
   method = "ETL",
-  tau = .1,
+  tau = 0.002,
   simName = simName,
   verbose = FALSE,
   consoleInterval = 1
@@ -90,7 +89,7 @@ out <- ssa(
 ssa.plot(out, show.title = TRUE, show.legend = FALSE)
 ```
 
-![](linear_chain_files/figure-gfm/etl-1.png)<!-- -->
+![](lotka_predator_prey_files/figure-gfm/etl-1.png)<!-- -->
 
 Run simulations with the Binomial tau-leap method
 
@@ -103,7 +102,7 @@ out <- ssa(
   parms = parms,
   tf = tf,
   method = "BTL",
-  f = 50,
+  f = 100,
   simName = simName,
   verbose = FALSE,
   consoleInterval = 1
@@ -111,7 +110,7 @@ out <- ssa(
 ssa.plot(out, show.title = TRUE, show.legend = FALSE)
 ```
 
-![](linear_chain_files/figure-gfm/btl-1.png)<!-- -->
+![](lotka_predator_prey_files/figure-gfm/btl-1.png)<!-- -->
 
 Run simulations with the Optimized tau-leap method
 
@@ -124,6 +123,7 @@ out <- ssa(
   parms = parms,
   tf = tf,
   method = "OTL",
+  epsilon = 0.1,
   simName = simName,
   verbose = FALSE,
   consoleInterval = 1
@@ -131,4 +131,4 @@ out <- ssa(
 ssa.plot(out, show.title = TRUE, show.legend = FALSE)
 ```
 
-![](linear_chain_files/figure-gfm/otl-1.png)<!-- -->
+![](lotka_predator_prey_files/figure-gfm/otl-1.png)<!-- -->

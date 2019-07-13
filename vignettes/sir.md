@@ -1,19 +1,21 @@
-Linear Chain System (Cao et al., 2004)
+Kermack-McKendrick SIR model (Brown & Rothery, 1993)
 ================
 
 <!-- github markdown built using 
-rmarkdown::render("vignettes/linear_chain.Rmd", output_format = "github_document")
+rmarkdown::render("vignettes/sir.Rmd", output_format = "github_document")
 -->
 
-The Linear Chain System consists of M chain reactions with M+1 species
-as follows:
+The Kermack-McKendrick SIR model is defined as
 
-``` 
-  S_1 --c1--> S_2
-  S_2 --c2--> S_3
-       ...
-  S_M --cM--> S_(M+1)
-```
+    dS/dt = -beta*N*S
+    dI/dt = beta*N*S - gamma*I
+    dR/dt = gamma*I
+
+This model consists of two reactions with the following per capita
+rates,
+
+    transmission: beta
+    recovery:     gamma
 
 Load package
 
@@ -24,31 +26,27 @@ library(GillespieSSA)
 Define parameters
 
 ``` r
-parms <- c(c = 1)                # Rate parameter
-M <- 50                          # Number of chain reactions
-simName <- "Linear Chain System" # Simulation name
-tf <- 5                          # Final time
+parms <- c(beta=.001, gamma=.100)
+tf <- 100                                      # Final time
+simName <- "Kermack-McKendrick SIR"            # Name
 ```
 
 Define initial state vector
 
 ``` r
-x0 <- c(1000, rep(0, M)) 
-names(x0) <- paste0("x", seq_len(M+1))
+x0 <- c(S=500, I=1, R=0)
 ```
 
 Define state-change matrix
 
 ``` r
-nu <- matrix(rep(0, M * (M+1)), ncol = M)
-nu[cbind(seq_len(M), seq_len(M))] <- -1
-nu[cbind(seq_len(M)+1, seq_len(M))] <- 1
+nu <- matrix(c(-1,0,1,-1,0,1),nrow=3,byrow=T)
 ```
 
 Define propensity functions
 
 ``` r
-a <- paste0("c*x", seq_len(M))
+a  <- c("beta*S*I", "gamma*I")
 ```
 
 Run simulations with the Direct method
@@ -69,7 +67,7 @@ out <- ssa(
 ssa.plot(out, show.title = TRUE, show.legend = FALSE)
 ```
 
-![](linear_chain_files/figure-gfm/direct-1.png)<!-- -->
+![](sir_files/figure-gfm/direct-1.png)<!-- -->
 
 Run simulations with the Explict tau-leap method
 
@@ -82,7 +80,6 @@ out <- ssa(
   parms = parms,
   tf = tf,
   method = "ETL",
-  tau = .1,
   simName = simName,
   verbose = FALSE,
   consoleInterval = 1
@@ -90,12 +87,12 @@ out <- ssa(
 ssa.plot(out, show.title = TRUE, show.legend = FALSE)
 ```
 
-![](linear_chain_files/figure-gfm/etl-1.png)<!-- -->
+![](sir_files/figure-gfm/etl-1.png)<!-- -->
 
 Run simulations with the Binomial tau-leap method
 
 ``` r
-set.seed(1)
+set.seed(2) # for some reason, this does not work with seed = 1
 out <- ssa(
   x0 = x0,
   a = a,
@@ -103,7 +100,6 @@ out <- ssa(
   parms = parms,
   tf = tf,
   method = "BTL",
-  f = 50,
   simName = simName,
   verbose = FALSE,
   consoleInterval = 1
@@ -111,7 +107,7 @@ out <- ssa(
 ssa.plot(out, show.title = TRUE, show.legend = FALSE)
 ```
 
-![](linear_chain_files/figure-gfm/btl-1.png)<!-- -->
+![](sir_files/figure-gfm/btl-1.png)<!-- -->
 
 Run simulations with the Optimized tau-leap method
 
@@ -131,4 +127,4 @@ out <- ssa(
 ssa.plot(out, show.title = TRUE, show.legend = FALSE)
 ```
 
-![](linear_chain_files/figure-gfm/otl-1.png)<!-- -->
+![](sir_files/figure-gfm/otl-1.png)<!-- -->
