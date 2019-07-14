@@ -23,6 +23,8 @@ knitr::opts_chunk$set(
 )
 library(tidyverse)
 set.seed(1)
+
+submission_to_cran <- TRUE
 ```
 
 **GillespieSSA** provides a simple to use, intuitive, and extensible interface to several stochastic simulation algorithms for generating simulated trajectories of finite population continuous-time model. Currently it implements Gillespie's exact stochastic simulation algorithm (Direct method) and several approximate methods (Explicit tau-leap, Binomial tau-leap, and Optimized tau-leap). 
@@ -58,7 +60,12 @@ walk(
     vignette_name <- gsub("\\.Rmd", "", file)
     markdown_name <- gsub("\\.Rmd", ".md", file)
     cat(
-      "* [", title, "](vignettes/", markdown_name, "): `vignette(\"", vignette_name, "\", package=\"GillespieSSA\")`\n",
+      "* ",
+      ifelse(submission_to_cran, "", "["),
+      title, 
+      ifelse(submission_to_cran, "", paste0("](vignettes/", markdown_name, ")")),
+      ": ",
+      "`vignette(\"", vignette_name, "\", package=\"GillespieSSA\")`\n",
       sep = ""
     )
   }
@@ -77,7 +84,10 @@ if (rerun_vignettes) {
 
 ## Latest changes
 
-Check out `news(package = "GillespieSSA")` or [NEWS.md](inst/NEWS.md) for a full list of changes.
+```{r include = FALSE}
+show_link <- ifelse(submission_to_cran, "", "or [NEWS.md](inst/NEWS.md) ")
+```
+Check out `news(package = "GillespieSSA")` `r show_link` for a full list of changes.
 
 <!-- This section gets automatically generated from inst/NEWS.md, and also generates inst/NEWS -->
 
