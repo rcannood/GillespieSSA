@@ -85,7 +85,7 @@ out <- ssa(
   nu = nu,
   parms = parms,
   tf = tf,
-  method = "D",
+  method = ssa.d(),
   simName = simName,
   verbose = FALSE,
   consoleInterval = 1
@@ -105,7 +105,7 @@ out <- ssa(
   nu = nu,
   parms = parms,
   tf = tf,
-  method = "ETL",
+  method = ssa.etl(),
   simName = simName,
   verbose = FALSE,
   consoleInterval = 1
@@ -125,7 +125,7 @@ out <- ssa(
   nu = nu,
   parms = parms,
   tf = tf,
-  method = "BTL",
+  method = ssa.btl(),
   simName = simName,
   verbose = FALSE,
   consoleInterval = 1
@@ -145,8 +145,7 @@ out <- ssa(
   nu = nu,
   parms = parms,
   tf = tf,
-  method = "OTL",
-  hor = rep(2,length(x0)),
+  method = ssa.otl(hor = rep(2, length(x0))),
   simName = simName,
   verbose = FALSE,
   consoleInterval = 1
