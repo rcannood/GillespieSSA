@@ -53,29 +53,19 @@ the valid options are:
 \item{simName}{optional text string providing an arbitrary name/label for
 the simulation.}
 
-\item{tau}{[DEPRECATED] step size for the \code{ETL} method (\eqn{>0}).}
+\item{tau}{[DEPRECATED], see \code{\link[=ssa.etl]{ssa.etl()}}}
 
-\item{f}{[DEPRECATED] coarse-graining factor for the \code{BTL} method (\eqn{>1}) where a
-higher value results in larger step-size.}
+\item{f}{[DEPRECATED], see \code{\link[=ssa.btl]{ssa.btl()}}}
 
-\item{epsilon}{[DEPRECATED] accuracy control parameter for the \code{OTL} method (\eqn{>0}).}
+\item{epsilon}{[DEPRECATED], see \code{\link[=ssa.otl]{ssa.otl()}}}
 
-\item{nc}{[DEPRECATED] critical firing threshold for the \code{OTL} method (positive integer).}
+\item{nc}{[DEPRECATED], see \code{\link[=ssa.otl]{ssa.otl()}}}
 
-\item{hor}{[DEPRECATED] numerical vector of the highest order reaction for each species where
-\eqn{\mathtt{hor} \in \{1,2,22\}}{hor=(1,2,22)}. Setting \code{hor=NaN} uses
-the default \code{hor=rep(22,N)} where \code{N} is the number of species (See
-page 6 in Cao et al. 2006). Unless \code{hor=NaN} the number of elements must
-equal the number of states \eqn{N}. Only applicable in the \code{OTL} method.}
+\item{hor}{[DEPRECATED], see \code{\link[=ssa.otl]{ssa.otl()}}}
 
-\item{dtf}{[DEPRECATED] \code{D} method threshold factor for the \code{OTL} method. The
-\code{OTL} method is suspended if \code{tau} it estimates is smaller than the
-\code{dtf} multiple of the \code{tau} that the \code{D} method would have used
-(i.e. \eqn{\tau_{\mathtt{OTL}} < \mathtt{dtf} \times \tau_{\mathtt{D}}}{tau_OTL<dtf*\tau_D})
-(See step 3, page 3 in Cao et al. 2006).}
+\item{dtf}{[DEPRECATED], see \code{\link[=ssa.otl]{ssa.otl()}}}
 
-\item{nd}{[DEPRECATED] number of single-reaction steps performed using the Direct method
-during \code{otl} suspension (See step 3, page 3, Cao et al. 2006).}
+\item{nd}{[DEPRECATED], see \code{\link[=ssa.otl]{ssa.otl()}}}
 
 \item{ignoreNegativeState}{boolean object indicating if negative state
 values should be ignored (this can occur in the \code{etl} method).

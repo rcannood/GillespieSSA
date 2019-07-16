@@ -54,23 +54,13 @@
 #' * [ssa.otl()] --- Optimized tau-leap.
 #' @param simName optional text string providing an arbitrary name/label for
 #' the simulation.
-#' @param tau \[DEPRECATED\] step size for the `ETL` method (\eqn{>0}).
-#' @param f \[DEPRECATED\] coarse-graining factor for the `BTL` method (\eqn{>1}) where a
-#'   higher value results in larger step-size.
-#' @param epsilon \[DEPRECATED\] accuracy control parameter for the `OTL` method (\eqn{>0}).
-#' @param nc \[DEPRECATED\] critical firing threshold for the `OTL` method (positive integer).
-#' @param hor \[DEPRECATED\] numerical vector of the highest order reaction for each species where
-#'   \eqn{\mathtt{hor} \in \{1,2,22\}}{hor=(1,2,22)}. Setting `hor=NaN` uses
-#'   the default `hor=rep(22,N)` where `N` is the number of species (See
-#'   page 6 in Cao et al. 2006). Unless `hor=NaN` the number of elements must
-#'   equal the number of states \eqn{N}. Only applicable in the `OTL` method.
-#' @param dtf \[DEPRECATED\] `D` method threshold factor for the `OTL` method. The
-#' `OTL` method is suspended if `tau` it estimates is smaller than the
-#'   `dtf` multiple of the `tau` that the `D` method would have used
-#'   (i.e. \eqn{\tau_{\mathtt{OTL}} < \mathtt{dtf} \times \tau_{\mathtt{D}}}{tau_OTL<dtf*\tau_D})
-#'   (See step 3, page 3 in Cao et al. 2006).
-#' @param nd \[DEPRECATED\] number of single-reaction steps performed using the Direct method
-#'  during `otl` suspension (See step 3, page 3, Cao et al. 2006).
+#' @param tau \[DEPRECATED\], see [ssa.etl()]
+#' @param f \[DEPRECATED\], see [ssa.btl()]
+#' @param epsilon \[DEPRECATED\], see [ssa.otl()]
+#' @param nc \[DEPRECATED\], see [ssa.otl()]
+#' @param hor \[DEPRECATED\], see [ssa.otl()]
+#' @param dtf \[DEPRECATED\], see [ssa.otl()]
+#' @param nd \[DEPRECATED\], see [ssa.otl()]
 #' @param ignoreNegativeState boolean object indicating if negative state
 #'  values should be ignored (this can occur in the `etl` method).
 #'  If `ignoreNegativeState=TRUE` the simulation finishes gracefully when
