@@ -16,7 +16,7 @@
 #' * the time leap (`tau`) and
 #' * the realized state change vector (`nu_j`).
 #'
-#' @seealso [GillespieSSA-package], [`ssa()`][ssa]
+#' @seealso [GillespieSSA-package], [ssa()]
 #' @references Chatterjee et al. (2005)
 #' @keywords datagen misc ts
 #'
