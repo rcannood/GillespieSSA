@@ -232,6 +232,7 @@
 #'
 #' @keywords misc datagen ts
 #'
+#' @importFrom stats sd
 #' @export
 ssa <- function(
   x0 = stop("undefined 'x0'"),
@@ -239,7 +240,7 @@ ssa <- function(
   nu = stop("undefined 'nu'"),
   parms = NULL,
   tf = stop("undefined 'tf'"),
-  method = "D",
+  method = c("D", "ETL", "BTL", "OTL"),
   simName = "",
   tau = 0.3,
   f = 10,
@@ -254,39 +255,45 @@ ssa <- function(
   verbose = FALSE,
   maxWallTime = Inf
 ) {
-  ssa.check.args(
-    x0 = x0,
-    a = a,
-    nu = nu,
-    tf = tf,
-    method = method,
-    tau = tau,
-    f = f,
-    epsilon = epsilon,
-    nc = nc,
-    hor = hor,
-    dtf = dtf,
-    nd = nd,
-    ignoreNegativeState = ignoreNegativeState,
-    consoleInterval = consoleInterval,
-    censusInterval = censusInterval,
-    verbose = verbose
-  )
+  ##############################################
+  ###              INPUT CHECKS              ###
+  ##############################################
+  # Do some basic check of the argument types
+  if (!is.numeric(x0))              stop("'x0' is not numeric")
+  if (!is.character(a))             stop("'a' is not of character type")
+  if (!is.numeric(nu))              stop("'nu' is not numeric")
+  if (!is.numeric(tf))              stop("'tf' is not numeric")
+  if (!is.character(method))        stop("'method' is not of character type")
+  if (!is.numeric(tau))             stop("'tau' is not numeric")
+  if (!is.numeric(f))               stop("'f' is not numeric")
+  if (!is.numeric(epsilon))         stop("'epsilon' is not numeric")
+  if (!is.numeric(nc))              stop("'nc' is not numeric")
+  if (!is.numeric(hor))             stop("'hor' is not numeric")
+  if (!is.numeric(dtf))             stop("'dtf' is not numeric")
+  if (!is.numeric(nd))              stop("'nd' is not numeric")
+  if (!is.numeric(consoleInterval)) stop("'consoleInterval' is not numeric")
+  if (!is.numeric(censusInterval))  stop("'censusInterval' is not numeric")
+  if ((ignoreNegativeState != TRUE) & (ignoreNegativeState != FALSE))
+    stop("'ignoreNegativeState' is not boolean")
+  if (!is.logical(verbose) || is.na(verbose)) stop("'verbose' is not boolean")
+  if (is.null(names(x0))) stop("'x0' is missing element names")
 
   # Convert lower case method names to upper case (undocumented featurette)
-  if (method=="d")   method <- "D"
-  if (method=="etl") method <- "ETL"
-  if (method=="btl") method <- "BTL"
-  if (method=="otl") method <- "OTL"
+  method <- match.arg(toupper(method), choices = c("D", "ETL", "BTL", "OTL"))
 
-  ssa.check.method(
-    x0 = x0,
-    a = a,
-    nu = nu,
-    method = method,
-    tau = tau,
-    f = f
-  )
+  # Check the consistency of the system dimensions, i.e. number of rows and
+  # columns in the state-change matrix and the number of elements in the initial
+  # state vector and the vector of propensity functions
+  if ((length(a) / ncol(nu)) != (length(x0) / nrow(nu)))
+    stop("inconsistent system dimensions (unequal 'nu' tessallation)")
+  if (((length(a) %% ncol(nu))>0) || ((length(x0) %% nrow(nu))>0))
+    stop("inconsistent system dimensions (fractional tessallation)")
+
+  # For the ETL method tau>0
+  if ((method == "ETL") && tau <= 0) stop("ETL method requires tau>0")
+
+  # Check that f (used in the BTL method) is >1
+  if (method == "BTL" && f <= 1) stop("f has to be >1")
 
   # Is the system nu-tiled along the diagonal?
   if (length(a) > ncol(nu) && length(x0) > nrow(nu)){
@@ -295,6 +302,10 @@ ssa <- function(
     if (method=="BTL") method <- "BTL.diag"
     if (method=="OTL") method <- "OTL.diag"
   }
+
+  ##############################################
+  ###             RUN SIMULATION             ###
+  ##############################################
 
   # Take a snapshot of all the options so they can be saved later
   args <- as.list(environment())
@@ -321,6 +332,66 @@ ssa <- function(
     maxWallTime = maxWallTime
   )
 
-  # Wrap up the simulation
-  ssa.terminate(args, out.rxn, tf, method, maxWallTime, verbose)
+  ##############################################
+  ###             RETURN OUTPUT              ###
+  ##############################################
+
+  # Get the final time and state vector
+  t <- out.rxn$timeSeries[nrow(out.rxn$timeSeries),1]
+  x <- out.rxn$timeSeries[nrow(out.rxn$timeSeries),-1]
+
+  # Figure out all the reasons why the simulation terminated
+  terminationStatus <- character(0)
+  if (t >= tf) {
+    terminationStatus <- c(terminationStatus, "finalTime")
+  }
+  if (all(x == 0)){
+    terminationStatus <- c(terminationStatus, "extinction")
+  }
+  if (any(x < 0)) {
+    terminationStatus <- c(terminationStatus, "negativeState")
+  }
+  if (all(out.rxn$eval_a == 0)) {
+    terminationStatus <- c(terminationStatus, "zeroProp")
+  }
+  if (out.rxn$elapsedWallTime >= maxWallTime) {
+    terminationStatus <- c(terminationStatus, "maxWallTime")
+  }
+
+  # Calculate some stats for the used method
+  stats <- list(
+    startWallime = out.rxn$startWallTime,
+    endWallTime = out.rxn$endWallTime,
+    elapsedWallTime = out.rxn$elapsedWallTime,
+    terminationStatus = terminationStatus,
+    nSteps = length(out.rxn$stepSize),
+    meanStepSize = mean(out.rxn$stepSize),
+    sdStepSize = sd(out.rxn$stepSize),
+    nSuspendedTauLeaps = out.rxn$nSuspendedTauLeaps
+  )
+
+  # Print some info/stats
+  if (verbose) {
+    cat(
+      "tf: ", t, "\n",
+      "TerminationStatus: ",         paste(stats$terminationStatus, collapse = ","), "\n",
+      "Duration: ",                  stats$elapsedWallTime," seconds\n",
+      "Method: ",                    method,"\n",
+      "Nr of steps: ",               stats$nSteps,"\n",
+      "Mean step size: ",            stats$meanStepSize, "+/-", stats$sdStepSize,"\n",
+      ifelse(method != "OTL", "", paste0(
+        "Nr suspended tau leaps: ",  stats$nSuspendedTauLeaps, "(", 100*(round(stats$nSuspendedTauLeaps/stats$nSteps)),"%)\n"
+      )),
+      "End wall time: ",             stats$endWallTime,"\n",
+      "--------------------\n",
+      sep = ""
+    )
+  }
+
+  # Return simulation results ('chopping' off any rows in the timeSeries matrix that have no values (NA))
+  list(
+    data = out.rxn$timeSeries,
+    stats = stats,
+    args = args
+  )
 }

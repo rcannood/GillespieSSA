@@ -1,80 +1,3 @@
-#' Higher-level interface to the method functions
-#'
-#' Higher-level interface to the method functions.
-#'
-#' Invokes a specific method function until the termination criteria are
-#' fulfilled. Updates the state vector, time, and re-evaluates the propensity
-#' functions in-between time steps. Also collects simulation data and returns
-#' it as a list object. This function is called from within [ssa()]
-#' and is not intended to be invoked stand alone.
-#'
-#' @param x0 initial states vector.
-#' @param a vector of propensity functions.
-#' @param nu state-change matrix.
-#' @param parms vector of model parameters.
-#' @param tf final time.
-#' @param method ssa method to use.
-#' @param tau step size for the `ETL` method (\eqn{>0}).
-#' @param f coarse-graining factor for the `BTL` method (\eqn{>1}) where a
-#' higher value results in larger step-size.
-#' @param epsilon accuracy control parameter for the `OTL` method
-#' (\eqn{>0}).
-#' @param nc critical firing threshold for the `OTL` method (positive
-#' integer).
-#' @param hor numerical vector of the highest order reaction for each species
-#' where \eqn{\mathtt{hor} \in \{1,2,22\}}{hor=(1,2,22)}. Only applicable in
-#' the `OTL` method.
-#' @param dtf `D` method threshold factor for the `OTL` method. The
-#' `OTL` method is suspended if `tau` it estimates is smaller than
-#' the `dtf` multiple of the `tau` that the `D` method would
-#' have used (i.e. \eqn{\tau_{\mathtt{OTL}} < \mathtt{dtf} \times
-#' \tau_{\mathtt{D}}}{tau_OTL<dtf*\tau_D}) (See step 3, page 3 in Cao et al.
-#' 2006).
-#' @param nd number of single-reaction steps performed using the Direct method
-#' during `otl` suspension (See step 3, page 3, Cao et al. 2006).
-#' @param ignoreNegativeState boolean object indicating if negative state
-#' values should be ignored (this can occur in the `etl` method). If
-#' `ignoreNegativeState=TRUE` the simulation finishes gracefully when
-#' encountering a negative population size (i.e. does not throw an error). If
-#' `ignoreNegativeState=FALSE` the simulation stops with an error message
-#' when encountering a negative population size.
-#' @param consoleInterval (approximate) interval at which `ssa` produces
-#' simulation status output on the console (assumes `verbose=TRUE`). If
-#' `consoleInterval=0` console output is generated each time step (or
-#' tau-leap). If `consoleInterval=Inf` no console output is generated.
-#' Note, `verbose=FALSE` disables all console output. **Console
-#' output drastically slows down simulations.**
-#' @param censusInterval (approximate) interval between recording the state of
-#' the system. If `censusInterval=0` \eqn{(t,x)} is recorded at each time
-#' step (or tau-leap). If `censusInterval=Inf` only
-#' \eqn{(t_0,x_0)}{(t0,x0)} and \eqn{(t_f,x_t)}{(tf,xf)} is recorded. Note, the
-#' size of the time step (or tau-leaps) ultimatelly limits the interval between
-#' subsequent recordings of the system state since the state of the system
-#' cannot be recorded at a finer time interval the size of the time steps (or
-#' tau-leaps).
-#' @param verbose boolean object indicating if the status of the simulation
-#' simulation should be displayed on the console. If `verbose=TRUE` the
-#' elapsed wall time and \eqn{(t,x)} is displayed on the console every
-#' `consoleInterval` time step and a brief summary is displayed at the end
-#' of the simulation. If `verbose=FALSE` the simulation runs
-#' *entirely* silent (overriding `consoleInterval`). **Verbose
-#' runs drastically slows down simulations.**
-#' @param maxWallTime maximum wall time duration (in seconds) that the
-#' simulation is allowed to run for before terminated. This option is useful,
-#' in particular, for systems that can end up growing uncontrollably.
-#' @return Returns a list object with the following elements,
-#' \item{timeSeries}{a numerical matrix object of the simulation time series
-#' where the first column is the time vector and subsequent columns are the
-#' state frequencies.} \item{eval_a}{vector of the evaluated propensity
-#' functions.} \item{elapsedWallTime}{elapsed wall time in seconds.}
-#' \item{startWallTime}{start wall clock time (YYYY-mm-dd HH:MM:SS)}.
-#' \item{endWallTime}{end wall clock time (YYYY-mm-dd HH:MM:SS).}
-#' \item{stepSize}{vector of step sizes (i.e. time increments).}
-#' \item{nSuspendedTauLeaps}{number of steps performed using the Direct method
-#' due to `OTL` suspension (only applicable for the `OTL` method).}
-#' @seealso [ssa()]
-#' @keywords misc datagen ts
-#'
 #' @importFrom utils flush.console
 ssa.run <- function(x0,a,nu,parms,tf,method,tau,f,epsilon,nc,hor,dtf,nd,
                     ignoreNegativeState,consoleInterval,censusInterval,
@@ -153,17 +76,18 @@ ssa.run <- function(x0,a,nu,parms,tf,method,tau,f,epsilon,nc,hor,dtf,nd,
   elapsedWallTime <- 0
   startWallTime   <- format(Sys.time())
   if (verbose) {
-    cat("Running ",method,
-        " method with console output every ",consoleInterval,
-        " time step\n",sep="")
-    cat("Start wall time: ",startWallTime,"...\n",sep="")
+    cat(
+      "Running ", method, " method with console output every ", consoleInterval, " time step\n",
+      "Start wall time: ", startWallTime, "...\n",
+      sep = ""
+    )
     flush.console()
   }
 
   # Display the first time step on the console (not necessary if
   # consoleInterval=0 since it is displayed every time step anyway and hence is
   # already taken care of below
-  if ((verbose) & (consoleInterval>0)) {
+  if (verbose && consoleInterval > 0) {
     cat("t=",.t," : ",sep="")
     cat(.x,sep=",")
     cat("\n")
@@ -175,9 +99,13 @@ ssa.run <- function(x0,a,nu,parms,tf,method,tau,f,epsilon,nc,hor,dtf,nd,
   suspendedTauLeapMethod <- FALSE
   nSuspendedTauLeaps <- 0
 
-  while( (.t<tf) & (any(.x>0)) &
-         (all(.x>=0)) & (any(eval_a>0)) &
-         (elapsedWallTime<=maxWallTime) ) {
+  while(
+    .t < tf &&
+    any(.x > 0) &&
+    all(.x >= 0) &&
+    any(eval_a > 0) &&
+    elapsedWallTime <= maxWallTime
+  ) {
     doCalc <- TRUE
     if ((verbose) & (timeForConsole<=.t)) {
       cat("(",elapsedWallTime,"s) t=",.t," : ",sep="")
@@ -187,40 +115,53 @@ ssa.run <- function(x0,a,nu,parms,tf,method,tau,f,epsilon,nc,hor,dtf,nd,
       timeForConsole <- timeForConsole + consoleInterval
     }
 
-    switch( method,
-            "D" = { out <- ssa.d(eval_a, .nu)
-                    if (suspendedTauLeapMethod) {
-                      suspendedTauLeapMethod <- suspendedTauLeapMethod - 1
-                      nSuspendedTauLeaps <- nSuspendedTauLeaps + 1
-                      if (!suspendedTauLeapMethod) method <- "OTL"
-                    }
-                  },
-          "ETL" = { out <- ssa.etl(eval_a, .nu, .tau) },
-          "BTL" = { out <- ssa.btl(.x, eval_a, .nu, .f) },
-          "OTL" = { out <- ssa.otl(.x, eval_a, .nu, hor, .nc, .epsilon, dtf, nd)
-                    suspendedTauLeapMethod <- out$suspendedTauLeapMethod
-                    if (suspendedTauLeapMethod) {
-                      method <- "D"
-                      doCalc <- FALSE
-                    }
-                  },
-       "D.diag" = { out <- ssa.d.diag(eval_a, .nu)
-                    if (suspendedTauLeapMethod) {
-                      suspendedTauLeapMethod <- suspendedTauLeapMethod - 1
-                      nSuspendedTauLeaps <- nSuspendedTauLeaps + 1
-                      if (!suspendedTauLeapMethod) method <- "OTL.diag"
-                    }
-                  },
-     "ETL.diag" = { out <- ssa.etl.diag(eval_a, .nu, .tau) },
-     "BTL.diag" = { out <- ssa.btl.diag(.x, eval_a, .nu, .f) },
-     "OTL.diag" = { out <- ssa.otl.diag(.x, eval_a, .nu, hor, .nc, .epsilon, dtf, nd)
-                    suspendedTauLeapMethod <- out$suspendedTauLeapMethod
-                    if (suspendedTauLeapMethod) {
-                      method <- "D.diag"
-                      doCalc <- FALSE
-                    }
-                  },
-                  stop("unknown SSA method")
+    switch(
+      method,
+      "D" = {
+        out <- ssa.d(eval_a, .nu)
+        if (suspendedTauLeapMethod) {
+          suspendedTauLeapMethod <- suspendedTauLeapMethod - 1
+          nSuspendedTauLeaps <- nSuspendedTauLeaps + 1
+          if (!suspendedTauLeapMethod) method <- "OTL"
+        }
+      },
+      "ETL" = {
+        out <- ssa.etl(eval_a, .nu, .tau)
+      },
+      "BTL" = {
+        out <- ssa.btl(.x, eval_a, .nu, .f)
+      },
+      "OTL" = {
+        out <- ssa.otl(.x, eval_a, .nu, hor, .nc, .epsilon, dtf, nd)
+        suspendedTauLeapMethod <- out$suspendedTauLeapMethod
+        if (suspendedTauLeapMethod) {
+          method <- "D"
+          doCalc <- FALSE
+        }
+      },
+      "D.diag" = {
+        out <- ssa.d.diag(eval_a, .nu)
+        if (suspendedTauLeapMethod) {
+          suspendedTauLeapMethod <- suspendedTauLeapMethod - 1
+          nSuspendedTauLeaps <- nSuspendedTauLeaps + 1
+          if (!suspendedTauLeapMethod) method <- "OTL.diag"
+        }
+      },
+      "ETL.diag" = {
+        out <- ssa.etl.diag(eval_a, .nu, .tau)
+      },
+      "BTL.diag" = {
+        out <- ssa.btl.diag(.x, eval_a, .nu, .f)
+      },
+      "OTL.diag" = {
+        out <- ssa.otl.diag(.x, eval_a, .nu, hor, .nc, .epsilon, dtf, nd)
+        suspendedTauLeapMethod <- out$suspendedTauLeapMethod
+        if (suspendedTauLeapMethod) {
+          method <- "D.diag"
+          doCalc <- FALSE
+        }
+      },
+      stop("unknown SSA method")
     )
 
     if (doCalc) {
@@ -277,5 +218,13 @@ ssa.run <- function(x0,a,nu,parms,tf,method,tau,f,epsilon,nc,hor,dtf,nd,
   timeSeries <- rbind(timeSeries, c(.t, .x))
   endWallTime <- format(Sys.time())
 
-  return(list(timeSeries=timeSeries, eval_a=eval_a, elapsedWallTime=elapsedWallTime, startWallTime=startWallTime, endWallTime=endWallTime, stepSize=stepSize, nSuspendedTauLeaps=nSuspendedTauLeaps))
+  list(
+    timeSeries = timeSeries,
+    eval_a = eval_a,
+    elapsedWallTime = elapsedWallTime,
+    startWallTime = startWallTime,
+    endWallTime = endWallTime,
+    stepSize = stepSize,
+    nSuspendedTauLeaps = nSuspendedTauLeaps
+  )
 }
