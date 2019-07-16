@@ -70,7 +70,26 @@ changes.
 
 <!-- This section gets automatically generated from inst/NEWS.md, and also generates inst/NEWS -->
 
-### Recent changes in GillespieSSA 0.6.0
+### Recent changes in GillespieSSA 0.6.1 (unreleased)
+
+  - MAJOR CHANGE: Instead of passing `"D"`, `"ETL"`, `"OTL"`, or `"BTL"`
+    to `ssa()`, it is expected to pass `ssa.d()`, `ssa.etl()`,
+    `ssa.otl()`, or `ssa.btl()`. This cleans up parameter setting
+    clutter in the `ssa()` function.
+
+  - MAJOR CHANGE: Rewrite `ssa.*()` and `ssa.*.diag()` as
+    `ssa_step.ssa_*()` and `ssa_step_diag.ssa_*()` S3 functions.
+
+  - MAJOR CHANGE: Do not save the current state in the function
+    environment. Instead, simply save it in a local variable.
+
+  - MAJOR CHANGE: Precompile propensity functions instead of evaluating
+    them as R code at each iteration.
+
+  - MAJOR CHANGE: Clean up and merge `ssa.run()`, `ssa.terminate()`,
+    `ssa.check.args()` and `ssa.check.method()` into `ssa()`.
+
+### Recent changes in GillespieSSA 0.6.0 (2019-07-15)
 
   - MAINTAINER: Maintainer has been changed to Robrecht Cannoodt.
 
@@ -89,10 +108,6 @@ changes.
     stand alone.” are no longer being exported.
 
   - BUG FIX: Fix warning and potential error in OTL.
-
-### Recent changes in GillespieSSA 0.5-4 (2010-08-16)
-
-  - DOCUMENTATION: Fix typos in documentation.
 
 ## References
 
