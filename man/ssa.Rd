@@ -5,20 +5,20 @@
 \title{Invoking the stochastic simulation algorithm}
 \usage{
 ssa(
-                   x0,        # initial state vector
-                    a,        # propensity vector
-                   nu,        # state-change matrix
-                parms = NULL, # model parameters
-                   tf,        # final time
-               method = "D",  # SSA method
+                   x0,            # initial state vector
+                    a,            # propensity vector
+                   nu,            # state-change matrix
+                parms = NULL,     # model parameters
+                   tf,            # final time
+               method,            # SSA method
               simName = "",
-                  tau = 0.3,  # only applicable for ETL
-                    f = 10,   # only applicable for BTL
-              epsilon = 0.03, # only applicable for OTL
-                   nc = 10,   # only applicable for OTL
-                  hor = NaN,  # only applicable for OTL
-                  dtf = 10,   # only applicable for OTL
-                   nd = 100,  # only applicable for OTL
+                  tau = 0.3,      # deprecated
+                    f = 10,       # deprecated
+              epsilon = 0.03,     # deprecated
+                   nc = 10,       # deprecated
+                  hor = NA_real_, # deprecated
+                  dtf = 10,       # deprecated
+                   nd = 100,      # deprecated
   ignoreNegativeState = TRUE,
       consoleInterval = 0,
        censusInterval = 0,
@@ -41,40 +41,40 @@ state (rows) caused by a single reaction of any given type (columns).}
 
 \item{tf}{final time.}
 
-\item{method}{text string indicating the \acronym{SSA} method to use,
+\item{method}{an SSA method,
 the valid options are:
 \itemize{
-\item \code{"D"} --- Direct method (default method),
-\item \code{"ETL"} - Explicit tau-leap,
-\item \code{"BTL"} --- Binomial tau-leap, or
-\item \code{"OTL"} --- Optimized tau-leap.
+\item \code{\link[=ssa.d]{ssa.d()}} --- Direct method (default method),
+\item \code{\link[=ssa.etl]{ssa.etl()}} - Explicit tau-leap,
+\item \code{\link[=ssa.btl]{ssa.btl()}} --- Binomial tau-leap, or
+\item \code{\link[=ssa.otl]{ssa.otl()}} --- Optimized tau-leap.
 }}
 
 \item{simName}{optional text string providing an arbitrary name/label for
 the simulation.}
 
-\item{tau}{step size for the \code{ETL} method (\eqn{>0}).}
+\item{tau}{[DEPRECATED] step size for the \code{ETL} method (\eqn{>0}).}
 
-\item{f}{coarse-graining factor for the \code{BTL} method (\eqn{>1}) where a
+\item{f}{[DEPRECATED] coarse-graining factor for the \code{BTL} method (\eqn{>1}) where a
 higher value results in larger step-size.}
 
-\item{epsilon}{accuracy control parameter for the \code{OTL} method (\eqn{>0}).}
+\item{epsilon}{[DEPRECATED] accuracy control parameter for the \code{OTL} method (\eqn{>0}).}
 
-\item{nc}{critical firing threshold for the \code{OTL} method (positive integer).}
+\item{nc}{[DEPRECATED] critical firing threshold for the \code{OTL} method (positive integer).}
 
-\item{hor}{numerical vector of the highest order reaction for each species where
+\item{hor}{[DEPRECATED] numerical vector of the highest order reaction for each species where
 \eqn{\mathtt{hor} \in \{1,2,22\}}{hor=(1,2,22)}. Setting \code{hor=NaN} uses
 the default \code{hor=rep(22,N)} where \code{N} is the number of species (See
 page 6 in Cao et al. 2006). Unless \code{hor=NaN} the number of elements must
 equal the number of states \eqn{N}. Only applicable in the \code{OTL} method.}
 
-\item{dtf}{\code{D} method threshold factor for the \code{OTL} method. The
+\item{dtf}{[DEPRECATED] \code{D} method threshold factor for the \code{OTL} method. The
 \code{OTL} method is suspended if \code{tau} it estimates is smaller than the
 \code{dtf} multiple of the \code{tau} that the \code{D} method would have used
 (i.e. \eqn{\tau_{\mathtt{OTL}} < \mathtt{dtf} \times \tau_{\mathtt{D}}}{tau_OTL<dtf*\tau_D})
 (See step 3, page 3 in Cao et al. 2006).}
 
-\item{nd}{number of single-reaction steps performed using the Direct method
+\item{nd}{[DEPRECATED] number of single-reaction steps performed using the Direct method
 during \code{otl} suspension (See step 3, page 3, Cao et al. 2006).}
 
 \item{ignoreNegativeState}{boolean object indicating if negative state
@@ -226,17 +226,17 @@ parms <- c(c=0.5)
 x0  <- c(X=10000)
 a   <- c("c*X")
 nu  <- matrix(-1)
-out <- ssa(x0,a,nu,parms,tf=10,simName="Irreversible isomerization") # Direct method
+out <- ssa(x0,a,nu,parms,tf=10,method=ssa.d(),simName="Irreversible isomerization") # Direct method
 plot(out$data[,1],out$data[,2]/10000,col="red",cex=0.5,pch=19)
 
 ## Smaller initial population size (X=100)
 x0  <- c(X=100)
-out <- ssa(x0,a,nu,parms,tf=10) # Direct method
+out <- ssa(x0,a,nu,parms,tf=10,method=ssa.d()) # Direct method
 points(out$data[,1],out$data[,2]/100,col="green",cex=0.5,pch=19)
 
 ## Small initial population size (X=10)
 x0  <- c(X=10)
-out <- ssa(x0,a,nu,parms,tf=10) # Direct method
+out <- ssa(x0,a,nu,parms,tf=10,method=ssa.d()) # Direct method
 points(out$data[,1],out$data[,2]/10,col="blue",cex=0.5,pch=19)
 
 ## Logistic growth
@@ -244,7 +244,7 @@ parms <- c(b=2, d=1, K=1000)
 x0  <- c(N=500)
 a   <- c("b*N", "(d+(b-d)*N/K)*N")
 nu  <- matrix(c(+1,-1),ncol=2)
-out <- ssa(x0,a,nu,parms,tf=10,method="D",maxWallTime=5,simName="Logistic growth")
+out <- ssa(x0,a,nu,parms,tf=10,method=ssa.d(),maxWallTime=5,simName="Logistic growth")
 ssa.plot(out)
 
 ## Kermack-McKendrick SIR model
@@ -252,7 +252,7 @@ parms <- c(beta=0.001, gamma=0.1)
 x0  <- c(S=499,I=1,R=0)
 a   <- c("beta*S*I","gamma*I")
 nu  <- matrix(c(-1,0,+1,-1,0,+1),nrow=3,byrow=TRUE)
-out <- ssa(x0,a,nu,parms,tf=100,simName="SIR model")
+out <- ssa(x0,a,nu,parms,tf=100,method=ssa.d(),simName="SIR model")
 ssa.plot(out)
 
 ## Lotka predator-prey model
@@ -260,7 +260,7 @@ parms <- c(c1=10, c2=.01, c3=10)
 x0  <- c(Y1=1000,Y2=1000)
 a   <- c("c1*Y1","c2*Y1*Y2","c3*Y2")
 nu  <- matrix(c(+1,-1,0,0,+1,-1),nrow=2,byrow=TRUE)
-out <- ssa(x0,a,nu,parms,tf=100,method="ETL",simName="Lotka predator-prey model")
+out <- ssa(x0,a,nu,parms,tf=100,method=ssa.etl(),simName="Lotka predator-prey model")
 ssa.plot(out)
 
 }

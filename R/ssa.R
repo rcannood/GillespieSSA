@@ -5,20 +5,20 @@
 #'
 #' @usage
 #' ssa(
-#'                    x0,        # initial state vector
-#'                     a,        # propensity vector
-#'                    nu,        # state-change matrix
-#'                 parms = NULL, # model parameters
-#'                    tf,        # final time
-#'                method = "D",  # SSA method
+#'                    x0,            # initial state vector
+#'                     a,            # propensity vector
+#'                    nu,            # state-change matrix
+#'                 parms = NULL,     # model parameters
+#'                    tf,            # final time
+#'                method,            # SSA method
 #'               simName = "",
-#'                   tau = 0.3,  # only applicable for ETL
-#'                     f = 10,   # only applicable for BTL
-#'               epsilon = 0.03, # only applicable for OTL
-#'                    nc = 10,   # only applicable for OTL
-#'                   hor = NaN,  # only applicable for OTL
-#'                   dtf = 10,   # only applicable for OTL
-#'                    nd = 100,  # only applicable for OTL
+#'                   tau = 0.3,      # deprecated
+#'                     f = 10,       # deprecated
+#'               epsilon = 0.03,     # deprecated
+#'                    nc = 10,       # deprecated
+#'                   hor = NA_real_, # deprecated
+#'                   dtf = 10,       # deprecated
+#'                    nd = 100,      # deprecated
 #'   ignoreNegativeState = TRUE,
 #'       consoleInterval = 0,
 #'        censusInterval = 0,
@@ -46,30 +46,30 @@
 #'   state (rows) caused by a single reaction of any given type (columns).
 #' @param parms named vector of model parameters.
 #' @param tf final time.
-#' @param method text string indicating the \acronym{SSA} method to use,
+#' @param method an SSA method,
 #' the valid options are:
-#' * `"D"` --- Direct method (default method),
-#' * `"ETL"` - Explicit tau-leap,
-#' * `"BTL"` --- Binomial tau-leap, or
-#' * `"OTL"` --- Optimized tau-leap.
+#' * [ssa.d()] --- Direct method (default method),
+#' * [ssa.etl()] - Explicit tau-leap,
+#' * [ssa.btl()] --- Binomial tau-leap, or
+#' * [ssa.otl()] --- Optimized tau-leap.
 #' @param simName optional text string providing an arbitrary name/label for
 #' the simulation.
-#' @param tau step size for the `ETL` method (\eqn{>0}).
-#' @param f coarse-graining factor for the `BTL` method (\eqn{>1}) where a
+#' @param tau \[DEPRECATED\] step size for the `ETL` method (\eqn{>0}).
+#' @param f \[DEPRECATED\] coarse-graining factor for the `BTL` method (\eqn{>1}) where a
 #'   higher value results in larger step-size.
-#' @param epsilon accuracy control parameter for the `OTL` method (\eqn{>0}).
-#' @param nc critical firing threshold for the `OTL` method (positive integer).
-#' @param hor numerical vector of the highest order reaction for each species where
+#' @param epsilon \[DEPRECATED\] accuracy control parameter for the `OTL` method (\eqn{>0}).
+#' @param nc \[DEPRECATED\] critical firing threshold for the `OTL` method (positive integer).
+#' @param hor \[DEPRECATED\] numerical vector of the highest order reaction for each species where
 #'   \eqn{\mathtt{hor} \in \{1,2,22\}}{hor=(1,2,22)}. Setting `hor=NaN` uses
 #'   the default `hor=rep(22,N)` where `N` is the number of species (See
 #'   page 6 in Cao et al. 2006). Unless `hor=NaN` the number of elements must
 #'   equal the number of states \eqn{N}. Only applicable in the `OTL` method.
-#' @param dtf `D` method threshold factor for the `OTL` method. The
+#' @param dtf \[DEPRECATED\] `D` method threshold factor for the `OTL` method. The
 #' `OTL` method is suspended if `tau` it estimates is smaller than the
 #'   `dtf` multiple of the `tau` that the `D` method would have used
 #'   (i.e. \eqn{\tau_{\mathtt{OTL}} < \mathtt{dtf} \times \tau_{\mathtt{D}}}{tau_OTL<dtf*\tau_D})
 #'   (See step 3, page 3 in Cao et al. 2006).
-#' @param nd number of single-reaction steps performed using the Direct method
+#' @param nd \[DEPRECATED\] number of single-reaction steps performed using the Direct method
 #'  during `otl` suspension (See step 3, page 3, Cao et al. 2006).
 #' @param ignoreNegativeState boolean object indicating if negative state
 #'  values should be ignored (this can occur in the `etl` method).
@@ -193,17 +193,17 @@
 #' x0  <- c(X=10000)
 #' a   <- c("c*X")
 #' nu  <- matrix(-1)
-#' out <- ssa(x0,a,nu,parms,tf=10,simName="Irreversible isomerization") # Direct method
+#' out <- ssa(x0,a,nu,parms,tf=10,method=ssa.d(),simName="Irreversible isomerization") # Direct method
 #' plot(out$data[,1],out$data[,2]/10000,col="red",cex=0.5,pch=19)
 #'
 #' ## Smaller initial population size (X=100)
 #' x0  <- c(X=100)
-#' out <- ssa(x0,a,nu,parms,tf=10) # Direct method
+#' out <- ssa(x0,a,nu,parms,tf=10,method=ssa.d()) # Direct method
 #' points(out$data[,1],out$data[,2]/100,col="green",cex=0.5,pch=19)
 #'
 #' ## Small initial population size (X=10)
 #' x0  <- c(X=10)
-#' out <- ssa(x0,a,nu,parms,tf=10) # Direct method
+#' out <- ssa(x0,a,nu,parms,tf=10,method=ssa.d()) # Direct method
 #' points(out$data[,1],out$data[,2]/10,col="blue",cex=0.5,pch=19)
 #'
 #' ## Logistic growth
@@ -211,7 +211,7 @@
 #' x0  <- c(N=500)
 #' a   <- c("b*N", "(d+(b-d)*N/K)*N")
 #' nu  <- matrix(c(+1,-1),ncol=2)
-#' out <- ssa(x0,a,nu,parms,tf=10,method="D",maxWallTime=5,simName="Logistic growth")
+#' out <- ssa(x0,a,nu,parms,tf=10,method=ssa.d(),maxWallTime=5,simName="Logistic growth")
 #' ssa.plot(out)
 #'
 #' ## Kermack-McKendrick SIR model
@@ -219,7 +219,7 @@
 #' x0  <- c(S=499,I=1,R=0)
 #' a   <- c("beta*S*I","gamma*I")
 #' nu  <- matrix(c(-1,0,+1,-1,0,+1),nrow=3,byrow=TRUE)
-#' out <- ssa(x0,a,nu,parms,tf=100,simName="SIR model")
+#' out <- ssa(x0,a,nu,parms,tf=100,method=ssa.d(),simName="SIR model")
 #' ssa.plot(out)
 #'
 #' ## Lotka predator-prey model
@@ -227,12 +227,15 @@
 #' x0  <- c(Y1=1000,Y2=1000)
 #' a   <- c("c1*Y1","c2*Y1*Y2","c3*Y2")
 #' nu  <- matrix(c(+1,-1,0,0,+1,-1),nrow=2,byrow=TRUE)
-#' out <- ssa(x0,a,nu,parms,tf=100,method="ETL",simName="Lotka predator-prey model")
+#' out <- ssa(x0,a,nu,parms,tf=100,method=ssa.etl(),simName="Lotka predator-prey model")
 #' ssa.plot(out)
 #'
 #' @keywords misc datagen ts
 #'
 #' @importFrom stats sd
+#' @importFrom utils flush.console
+#' @importFrom methods is
+#'
 #' @export
 ssa <- function(
   x0 = stop("undefined 'x0'"),
@@ -240,13 +243,13 @@ ssa <- function(
   nu = stop("undefined 'nu'"),
   parms = NULL,
   tf = stop("undefined 'tf'"),
-  method = c("D", "ETL", "BTL", "OTL"),
+  method = stop("undefined 'method'"),
   simName = "",
   tau = 0.3,
   f = 10,
   epsilon = 0.03,
   nc = 10,
-  hor = NaN,
+  hor = NA_real_,
   dtf = 10,
   nd = 100,
   ignoreNegativeState = TRUE,
@@ -255,31 +258,38 @@ ssa <- function(
   verbose = FALSE,
   maxWallTime = Inf
 ) {
+
   ##############################################
   ###              INPUT CHECKS              ###
   ##############################################
   # Do some basic check of the argument types
-  if (!is.numeric(x0))              stop("'x0' is not numeric")
-  if (!is.character(a))             stop("'a' is not of character type")
-  if (!is.numeric(nu))              stop("'nu' is not numeric")
-  if (!is.numeric(tf))              stop("'tf' is not numeric")
-  if (!is.character(method))        stop("'method' is not of character type")
-  if (!is.numeric(tau))             stop("'tau' is not numeric")
-  if (!is.numeric(f))               stop("'f' is not numeric")
-  if (!is.numeric(epsilon))         stop("'epsilon' is not numeric")
-  if (!is.numeric(nc))              stop("'nc' is not numeric")
-  if (!is.numeric(hor))             stop("'hor' is not numeric")
-  if (!is.numeric(dtf))             stop("'dtf' is not numeric")
-  if (!is.numeric(nd))              stop("'nd' is not numeric")
+  if (!is.numeric(x0)) stop("'x0' is not numeric")
+  if (!is.character(a)) stop("'a' is not of character type")
+  if (!is.numeric(nu)) stop("'nu' is not numeric")
+  if (!is.numeric(tf)) stop("'tf' is not numeric")
   if (!is.numeric(consoleInterval)) stop("'consoleInterval' is not numeric")
-  if (!is.numeric(censusInterval))  stop("'censusInterval' is not numeric")
-  if ((ignoreNegativeState != TRUE) & (ignoreNegativeState != FALSE))
-    stop("'ignoreNegativeState' is not boolean")
+  if (!is.numeric(censusInterval)) stop("'censusInterval' is not numeric")
+  if (!is.logical(ignoreNegativeState) || is.na(ignoreNegativeState)) stop("'ignoreNegativeState' is not boolean")
   if (!is.logical(verbose) || is.na(verbose)) stop("'verbose' is not boolean")
   if (is.null(names(x0))) stop("'x0' is missing element names")
 
-  # Convert lower case method names to upper case (undocumented featurette)
-  method <- match.arg(toupper(method), choices = c("D", "ETL", "BTL", "OTL"))
+  # preserve old interface by allowing method to be a character
+  if (is.character(method)) {
+    method <- match.arg(toupper(method), choices = c("D", "ETL", "BTL", "OTL"))
+
+    method <- switch(
+      method,
+      "D" = ssa.d(),
+      "ETL" = ssa.etl(tau = tau),
+      "BTL" = ssa.btl(f = f),
+      "OTL" = ssa.otl(hor = hor, nc = nc, epsilon = epsilon, dtf = dtf, nd = nd),
+      stop("unknown SSA method")
+    )
+  }
+
+  if (!is(method, "ssa_method")) {
+    stop("'method' should be an object created by ssa.d(), ssa.etl(), ssa.btl(), or ssa.otl()")
+  }
 
   # Check the consistency of the system dimensions, i.e. number of rows and
   # columns in the state-change matrix and the number of elements in the initial
@@ -289,56 +299,151 @@ ssa <- function(
   if (((length(a) %% ncol(nu))>0) || ((length(x0) %% nrow(nu))>0))
     stop("inconsistent system dimensions (fractional tessallation)")
 
-  # For the ETL method tau>0
-  if ((method == "ETL") && tau <= 0) stop("ETL method requires tau>0")
-
-  # Check that f (used in the BTL method) is >1
-  if (method == "BTL" && f <= 1) stop("f has to be >1")
+  # Take a snapshot of all the options so they can be saved later
+  args <- as.list(environment())
 
   # Is the system nu-tiled along the diagonal?
-  if (length(a) > ncol(nu) && length(x0) > nrow(nu)){
-    if (method=="D")   method <- "D.diag"
-    if (method=="ETL") method <- "ETL.diag"
-    if (method=="BTL") method <- "BTL.diag"
-    if (method=="OTL") method <- "OTL.diag"
-  }
+  is_nu_tiled <- length(a) > ncol(nu) && length(x0) > nrow(nu)
 
   ##############################################
   ###             RUN SIMULATION             ###
   ##############################################
 
-  # Take a snapshot of all the options so they can be saved later
-  args <- as.list(environment())
+  # Assign the state variables defined in the state vector
+  x <- x0
 
-  # Run the simulation
-  out.rxn <- ssa.run(
-    x0 = x0,
-    a = a,
-    nu = nu,
-    parms = parms,
-    tf = tf,
-    method = method,
-    tau = tau,
-    f = f,
-    epsilon = epsilon,
-    nc = nc,
-    hor = hor,
-    dtf = dtf,
-    nd = nd,
-    ignoreNegativeState = ignoreNegativeState,
-    consoleInterval = consoleInterval,
-    censusInterval = censusInterval,
-    verbose = verbose,
-    maxWallTime = maxWallTime
-  )
+  # Initialize miscellaneous counters
+  t <- 0 # Initialize the simulation time
+  timeOfNextCensus <- t + censusInterval  # Time of first data census
+  timeForConsole   <- t + consoleInterval # Time of first console output
+
+  # Add the initial state of the system to the time series matrix and 'pre-grow'
+  # with NAs
+  timeSeries <- matrix(nrow = 1000, ncol = length(x) + 1)
+  colnames(timeSeries) <- c("t", names(x))
+  timeSeries[1, ] <- c(t, x)
+
+  # Set up empty vectors for the evaluated propensity functions
+  a.funs <- parse.propensity.functions(a, x0, parms)
+
+  # Evaluate the initial transition rates by evaluating the propensity functions
+  eval_a <- a.funs(x, parms)
+  if (any(eval_a < 0)) stop("negative propensity function")
+
+  # validate parameters
+  method$params <- ssa_validate_parameters(method, x, eval_a, nu)
+
+  #############################################################################
+  # We are ready to roll, start the simulation loop...
+  # Continue the simulation loop as long as we have not reached the end time,
+  # all of the populations have not gone extincs, as long as no population is
+  # negative (occasinal by-product of the ETL method), and as long as at
+  # least one propensity function is larger than zero
+  #############################################################################
+
+  # Start the timer and make an announcement if running silent
+  procTimeStart   <- proc.time()
+  elapsedWallTime <- 0
+  startWallTime   <- format(Sys.time())
+  if (verbose) {
+    cat(
+      "Running ", method$name, " method with console output every ", consoleInterval, " time step\n",
+      "Start wall time: ", startWallTime, "...\n",
+      sep = ""
+    )
+    flush.console()
+  }
+
+  # Display the first time step on the console (not necessary if
+  # consoleInterval=0 since it is displayed every time step anyway and hence is
+  # already taken care of below
+  if (verbose && consoleInterval > 0) {
+    cat("t=", t, " : ", paste0(x, collapse = ","), "\n", sep = "")
+    flush.console()
+  }
+
+  stepSize <- integer(0)
+  currentRow <- 2 # First row contains (t0,x0)
+
+  method_state <- ssa_initialise_state(method)
+
+  while(
+    t < tf &&
+    any(x > 0) &&
+    all(x >= 0) &&
+    any(eval_a > 0) &&
+    elapsedWallTime <= maxWallTime
+  ) {
+    if (verbose && timeForConsole <= t) {
+      cat("(", elapsedWallTime, "s) t=", t, " : ", paste0(x, collapse = ","), "\n", sep="")
+      flush.console()
+      timeForConsole <- timeForConsole + consoleInterval
+    }
+
+    out <-
+      if (!is_nu_tiled) {
+        ssa_step(method, x = x, a = eval_a, nu = nu, method_state = method_state)
+      } else {
+        ssa_step_diag(method, x = x, a = eval_a, nu = nu, method_state = method_state)
+      }
+
+    t <- t + out$tau
+    x <- x + out$nu_j
+
+    if ("method_state" %in% names(out)) {
+      method_state <- out$method_state
+    }
+
+    # Check that no states are negative (can occur in some tau-leaping methods)
+    if (any(x < 0) && !ignoreNegativeState) {
+      stop("at least one population in 'x' is negative.\n")
+    }
+
+    # We need to record the step size separatelly from the resultMatrix (below)
+    # since the history may not be recorded at each step (depending on the value
+    # of 'censusInterval')
+    stepSize <- c(stepSize, out$tau)
+
+    # If it's time record the current state of the system (t,x)
+    if (timeOfNextCensus <= t) {
+      timeSeries[currentRow,1] <- t
+      timeSeries[currentRow,-1] <- x
+      currentRow <- currentRow + 1
+      timeOfNextCensus <- t + censusInterval
+
+      # If necessary add empty rows to the time series matrix
+      if (currentRow > nrow(timeSeries)) {
+        timeSeries <- rbind(timeSeries, matrix(nrow=1000, ncol = length(x) + 1))
+      }
+    }
+
+    # Evaluate the transition rates for the next time step
+    eval_a <- a.funs(x, parms)
+    eval_a[is.na(eval_a)] <- 0 # Replace NA with zero (0/0 gives NA)
+    if (any(eval_a < 0))
+      warning("negative propensity function - coersing to zero\n")
+    eval_a[eval_a < 0] <- 0
+
+    procTimeEnd <- proc.time()
+    elapsedWallTime <- procTimeEnd[3] - procTimeStart[3]
+  }
+
+  # If applicable, display the last time step on the console
+  if (verbose) {
+    cat("t=", t, " : ", paste(x, collapse = ","), "\n", sep="")
+    flush.console()
+  }
+
+  # Remove all the remaining "pre-grown" NA rows
+  timeSeries <- timeSeries[!is.na(timeSeries[,1]),]
+
+  # Record the final state of the system
+  timeSeries <- rbind(timeSeries, c(t, x))
+  endWallTime <- format(Sys.time())
 
   ##############################################
   ###             RETURN OUTPUT              ###
   ##############################################
-
-  # Get the final time and state vector
-  t <- out.rxn$timeSeries[nrow(out.rxn$timeSeries),1]
-  x <- out.rxn$timeSeries[nrow(out.rxn$timeSeries),-1]
 
   # Figure out all the reasons why the simulation terminated
   terminationStatus <- character(0)
@@ -351,36 +456,38 @@ ssa <- function(
   if (any(x < 0)) {
     terminationStatus <- c(terminationStatus, "negativeState")
   }
-  if (all(out.rxn$eval_a == 0)) {
+  if (all(eval_a == 0)) {
     terminationStatus <- c(terminationStatus, "zeroProp")
   }
-  if (out.rxn$elapsedWallTime >= maxWallTime) {
+  if (elapsedWallTime >= maxWallTime) {
     terminationStatus <- c(terminationStatus, "maxWallTime")
   }
 
   # Calculate some stats for the used method
   stats <- list(
-    startWallime = out.rxn$startWallTime,
-    endWallTime = out.rxn$endWallTime,
-    elapsedWallTime = out.rxn$elapsedWallTime,
+    startWallime = startWallTime,
+    endWallTime = endWallTime,
+    elapsedWallTime = elapsedWallTime,
     terminationStatus = terminationStatus,
-    nSteps = length(out.rxn$stepSize),
-    meanStepSize = mean(out.rxn$stepSize),
-    sdStepSize = sd(out.rxn$stepSize),
-    nSuspendedTauLeaps = out.rxn$nSuspendedTauLeaps
+    nSteps = length(stepSize),
+    meanStepSize = mean(stepSize),
+    sdStepSize = sd(stepSize)
   )
+  if (method$name == "OTL") {
+    stats$nSuspendedTauLeaps <- method_state$total_suspensions
+  }
 
   # Print some info/stats
   if (verbose) {
     cat(
       "tf: ", t, "\n",
       "TerminationStatus: ",         paste(stats$terminationStatus, collapse = ","), "\n",
-      "Duration: ",                  stats$elapsedWallTime," seconds\n",
-      "Method: ",                    method,"\n",
-      "Nr of steps: ",               stats$nSteps,"\n",
-      "Mean step size: ",            stats$meanStepSize, "+/-", stats$sdStepSize,"\n",
-      ifelse(method != "OTL", "", paste0(
-        "Nr suspended tau leaps: ",  stats$nSuspendedTauLeaps, "(", 100*(round(stats$nSuspendedTauLeaps/stats$nSteps)),"%)\n"
+      "Duration: ",                  stats$elapsedWallTime, " seconds\n",
+      "Method: ",                    method$name, "\n",
+      "Nr of steps: ",               stats$nSteps, "\n",
+      "Mean step size: ",            stats$meanStepSize, "+/-", stats$sdStepSize, "\n",
+      ifelse(method$name != "OTL", "", paste0(
+        "Nr suspended tau leaps: ",  stats$nSuspendedTauLeaps, "(", 100*(round(stats$nSuspendedTauLeaps/stats$nSteps)), "%)\n"
       )),
       "End wall time: ",             stats$endWallTime,"\n",
       "--------------------\n",
@@ -390,7 +497,7 @@ ssa <- function(
 
   # Return simulation results ('chopping' off any rows in the timeSeries matrix that have no values (NA))
   list(
-    data = out.rxn$timeSeries,
+    data = timeSeries,
     stats = stats,
     args = args
   )

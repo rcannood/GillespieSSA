@@ -6,7 +6,7 @@
 \usage{
 ssa.plot(out = stop("requires simulation output object"),
   file = "ssaplot", by = 1, plot.from = 2,
-  plot.to = dim(out$data)[2], plot.by = 1, show.title = TRUE,
+  plot.to = ncol(out$data), plot.by = 1, show.title = TRUE,
   show.legend = TRUE)
 }
 \arguments{
