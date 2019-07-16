@@ -319,9 +319,8 @@ ssa <- function(
 
   # Add the initial state of the system to the time series matrix and 'pre-grow'
   # with NAs
-  timeSeries <- matrix(nrow = 1000, ncol = length(x) + 1)
-  colnames(timeSeries) <- c("t", names(x))
-  timeSeries[1, ] <- c(t, x)
+  timeSeries <- vector("list", length = 1000)
+  timeSeries[[1]] <- c(t, x)
 
   # Set up empty vectors for the evaluated propensity functions
   a.funs <- parse.propensity.functions(a, x0, parms)
@@ -406,14 +405,13 @@ ssa <- function(
 
     # If it's time record the current state of the system (t,x)
     if (timeOfNextCensus <= t) {
-      timeSeries[currentRow,1] <- t
-      timeSeries[currentRow,-1] <- x
+      timeSeries[[currentRow]] <- c(t, x)
       currentRow <- currentRow + 1
       timeOfNextCensus <- t + censusInterval
 
       # If necessary add empty rows to the time series matrix
-      if (currentRow > nrow(timeSeries)) {
-        timeSeries <- rbind(timeSeries, matrix(nrow=1000, ncol = length(x) + 1))
+      if (currentRow > length(timeSeries)) {
+        length(timeSeries) <- length(timeSeries) * 2
       }
     }
 
@@ -434,12 +432,13 @@ ssa <- function(
     flush.console()
   }
 
-  # Remove all the remaining "pre-grown" NA rows
-  timeSeries <- timeSeries[!is.na(timeSeries[,1]),]
-
   # Record the final state of the system
-  timeSeries <- rbind(timeSeries, c(t, x))
+  timeSeries[[currentRow]] <- c(t, x)
   endWallTime <- format(Sys.time())
+
+  # Remove all the remaining "pre-grown" NA rows
+  timeSeries <- do.call(rbind, timeSeries)
+  colnames(timeSeries) <- c("t", names(x0))
 
   ##############################################
   ###             RETURN OUTPUT              ###
