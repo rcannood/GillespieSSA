@@ -10,7 +10,7 @@
 #'                    nu,            # state-change matrix
 #'                 parms = NULL,     # model parameters
 #'                    tf,            # final time
-#'                method,            # SSA method
+#'                method = ssa.d(),  # SSA method
 #'               simName = "",
 #'                   tau = 0.3,      # deprecated
 #'                     f = 10,       # deprecated
@@ -233,7 +233,7 @@ ssa <- function(
   nu = stop("undefined 'nu'"),
   parms = NULL,
   tf = stop("undefined 'tf'"),
-  method = stop("undefined 'method'"),
+  method = ssa.d(),
   simName = "",
   tau = 0.3,
   f = 10,

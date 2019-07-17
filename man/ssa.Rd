@@ -10,7 +10,7 @@ ssa(
                    nu,            # state-change matrix
                 parms = NULL,     # model parameters
                    tf,            # final time
-               method,            # SSA method
+               method = ssa.d(),  # SSA method
               simName = "",
                   tau = 0.3,      # deprecated
                     f = 10,       # deprecated
