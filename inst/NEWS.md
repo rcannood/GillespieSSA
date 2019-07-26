@@ -1,4 +1,8 @@
-# GillespieSSA 0.6.1 (unreleased)
+# GillespieSSA 0.6.1
+
+This release contains a major rewrite of the internal code, to make sure
+the code is readable and that the algorithm doesn't continuously update
+the local environment.
 
 * MAJOR CHANGE: Instead of passing `"D"`, `"ETL"`, `"OTL"`, or `"BTL"` to `ssa()`,
   it is expected to pass `ssa.d()`, `ssa.etl()`, `ssa.otl()`, or `ssa.btl()`. 

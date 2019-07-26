@@ -1,43 +1,29 @@
-One of our lab's projects is closely related to this 
-package. As such, I would like to provide custody to
-this package in order to ensure it is well maintained
-over time. 
+# GillespieSSA 0.6.1
 
-Special care will be taken to ensure the interface of the package
-remains the unchanged, as not to break the package for legacy users.
+This release contains a major rewrite of the internal code, to make sure
+the code is readable and that the algorithm doesn't continuously update
+the local environment.
 
-## List of changes
-* DOCUMENTATION: Documentation was roxygenised and markdownised.
-
-* DOCUMENTATION: Port demo's to vignettes.
-
-* DOCUMENTATION: Added NEWS and README.
-
-* DOCUMENTATION: Remove \dontrun's from examples.
-
-* MINOR CHANGE: Many functions were refactorised in order to clean up the code.
-
-* MINOR CHANGE: Functions which are marked "Not intended to be invoked stand alone."
-  are no longer being exported.
-
-* BUG FIX: Fix warning and potential error in OTL.
+* MAJOR CHANGE: Instead of passing `"D"`, `"ETL"`, `"OTL"`, or `"BTL"` to `ssa()`,
+  it is expected to pass `ssa.d()`, `ssa.etl()`, `ssa.otl()`, or `ssa.btl()`. 
+  This cleans up parameter setting clutter in the `ssa()` function.
+  
+* MAJOR CHANGE: Rewrite `ssa.*()` and `ssa.*.diag()` as
+  `ssa_step.ssa_*()` and `ssa_step_diag.ssa_*()` S3 functions.
+  
+* MAJOR CHANGE: Do not save the current state in the function environment. 
+  Instead, simply save it in a local variable. 
+  
+* MAJOR CHANGE: Precompile propensity functions instead of evaluating them 
+  as R code at each iteration.
+  
+* MAJOR CHANGE: Clean up and merge `ssa.run()`, `ssa.terminate()`, `ssa.check.args()` 
+  and `ssa.check.method()` into `ssa()`.
 
 ## Test environments
 * local Fedora install, R 3.6.0
 * ubuntu 16.04 (on travis-ci), R 3.6.0
 * win-builder (devel and release)
-
-Win-builder produced the following NOTE:
-```
-Possibly mis-spelled words in DESCRIPTION:
-  Gillespie's (3:9, 20:10)
-```
-
-I tried multiple variations of
-Gillespie's, 'Gillespie's', and 'Gillespie's, 
-all resulted in the same NOTE. Feel free to 
-suggest alternatives.
-
 
 ## R CMD check results
 

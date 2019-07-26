@@ -39,38 +39,35 @@ devtools::install_github("rcannood/GillespieSSA", build_vignettes = TRUE)
 
 The following example models are available:
 
-  - [Decaying-Dimerization Reaction Set (Gillespie,
-    2001)](vignettes/decaying_dimer.md): `vignette("decaying_dimer",
+  - Decaying-Dimerization Reaction Set (Gillespie, 2001):
+    `vignette("decaying_dimer", package="GillespieSSA")`
+  - SIRS metapopulation model (Pineda-Krch, 2008):
+    `vignette("epi_chain", package="GillespieSSA")`
+  - Linear Chain System (Cao et al., 2004): `vignette("linear_chain",
     package="GillespieSSA")`
-  - [SIRS metapopulation model (Pineda-Krch,
-    2008)](vignettes/epi_chain.md): `vignette("epi_chain",
-    package="GillespieSSA")`
-  - [Linear Chain System (Cao et al., 2004)](vignettes/linear_chain.md):
-    `vignette("linear_chain", package="GillespieSSA")`
-  - [Pearl-Verhulst Logistic growth model (Kot,
-    2001)](vignettes/logistic_growth.md): `vignette("logistic_growth",
-    package="GillespieSSA")`
-  - [Lotka predator-prey model (Gillespie, 1977; Kot,
-    2001)](vignettes/lotka_predator_prey.md):
+  - Pearl-Verhulst Logistic growth model (Kot, 2001):
+    `vignette("logistic_growth", package="GillespieSSA")`
+  - Lotka predator-prey model (Gillespie, 1977; Kot, 2001):
     `vignette("lotka_predator_prey", package="GillespieSSA")`
-  - [Radioactive decay model (Gillespie,
-    1977)](vignettes/radioactive_decay.md):
+  - Radioactive decay model (Gillespie, 1977):
     `vignette("radioactive_decay", package="GillespieSSA")`
-  - [Rosenzweig-MacArthur predator-prey model (Pineda-Krch et al.,
-    2007)](vignettes/rm_predator_prey.md): `vignette("rm_predator_prey",
-    package="GillespieSSA")`
-  - [Kermack-McKendrick SIR model (Brown & Rothery,
-    1993)](vignettes/sir.md): `vignette("sir", package="GillespieSSA")`
+  - Rosenzweig-MacArthur predator-prey model (Pineda-Krch et al., 2007):
+    `vignette("rm_predator_prey", package="GillespieSSA")`
+  - Kermack-McKendrick SIR model (Brown & Rothery, 1993):
+    `vignette("sir", package="GillespieSSA")`
 
 ## Latest changes
 
-Check out `news(package = "GillespieSSA")` or [NEWS.md](inst/NEWS.md)
-for a full list of
+Check out `news(package = "GillespieSSA")` for a full list of
 changes.
 
 <!-- This section gets automatically generated from inst/NEWS.md, and also generates inst/NEWS -->
 
-### Recent changes in GillespieSSA 0.6.1 (unreleased)
+### Recent changes in GillespieSSA 0.6.1
+
+This release contains a major rewrite of the internal code, to make sure
+the code is readable and that the algorithm doesn’t continuously update
+the local environment.
 
   - MAJOR CHANGE: Instead of passing `"D"`, `"ETL"`, `"OTL"`, or `"BTL"`
     to `ssa()`, it is expected to pass `ssa.d()`, `ssa.etl()`,
