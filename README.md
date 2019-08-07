@@ -58,10 +58,10 @@ The following example models are available:
 
 ## Latest changes
 
-Check out `news(package = "GillespieSSA")` for a full list of
-changes.
+Check out `news(package = "GillespieSSA")` or [NEWS.md](NEWS.md) for a
+full list of changes.
 
-<!-- This section gets automatically generated from inst/NEWS.md, and also generates inst/NEWS -->
+<!-- This section gets automatically generated from inst/NEWS.md -->
 
 ### Recent changes in GillespieSSA 0.6.1
 
