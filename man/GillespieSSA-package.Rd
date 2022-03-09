@@ -64,7 +64,7 @@ foolproof as the Direct method.
 
 \section{Example models}{
 
-Individual demo models can be run by issuing \code{demo(<model name>)},
+Individual demo models can be run by issuing \verb{demo(<model name>)},
 alternatively all of the demo models can be run using \code{demo(GillespieSSA)}.
 The following example models are available:
 

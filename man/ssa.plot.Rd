@@ -4,10 +4,16 @@
 \alias{ssa.plot}
 \title{Simple plotting of ssa output}
 \usage{
-ssa.plot(out = stop("requires simulation output object"),
-  file = "ssaplot", by = 1, plot.from = 2,
-  plot.to = ncol(out$data), plot.by = 1, show.title = TRUE,
-  show.legend = TRUE)
+ssa.plot(
+  out = stop("requires simulation output object"),
+  file = "ssaplot",
+  by = 1,
+  plot.from = 2,
+  plot.to = ncol(out$data),
+  plot.by = 1,
+  show.title = TRUE,
+  show.legend = TRUE
+)
 }
 \arguments{
 \item{out}{data object returned from \code{\link[=ssa]{ssa()}}.}

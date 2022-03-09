@@ -4,8 +4,7 @@
 \alias{ssa.otl}
 \title{Optimized tau-leap method (OTL)}
 \usage{
-ssa.otl(epsilon = 0.03, nc = 10, hor = NA_real_, dtf = 10,
-  nd = 100)
+ssa.otl(epsilon = 0.03, nc = 10, hor = NA_real_, dtf = 10, nd = 100)
 }
 \arguments{
 \item{epsilon}{error control parameter.}

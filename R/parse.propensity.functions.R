@@ -7,7 +7,7 @@ parse.propensity.functions <- function(propensity.funs, x, parms) {
   strings <- sapply(seq_along(propensity.funs), function(i) {
     string <- propensity.funs[[i]]
 
-    aag <- strsplit(gsub("([A-Za-z][A-Za-z0-9_]*)", " \\1 ", string), " ")[[1]]
+    aag <- strsplit(gsub("([A-Za-z0-9_\\.][A-Za-z0-9_\\.]*)", " \\1 ", string), " ")[[1]]
 
     # check for x
     aag.match <- match(aag, x.names)

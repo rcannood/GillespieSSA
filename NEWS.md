@@ -1,3 +1,7 @@
+# GillespieSSA 0.6.2
+
+* MINOR CHANGE: Allow using `.t` as parameter in the propensity functions.
+
 # GillespieSSA 0.6.1
 
 This release contains a major rewrite of the internal code, to make sure

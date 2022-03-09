@@ -1,7 +1,7 @@
 Package: GillespieSSA
 Type: Package
 Title: Gillespie's Stochastic Simulation Algorithm (SSA)
-Version: 0.6.1
+Version: 0.6.2
 Description: Provides a simple to use, intuitive, and
   extensible interface to several stochastic simulation
   algorithms for generating simulated trajectories of finite
@@ -39,7 +39,7 @@ Suggests:
 URL: https://www.github.com/rcannood/GillespieSSA
 License: GPL (>= 3)
 LazyData: TRUE
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.2
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr

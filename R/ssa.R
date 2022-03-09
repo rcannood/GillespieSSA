@@ -312,6 +312,9 @@ ssa <- function(
   timeSeries <- vector("list", length = 1000)
   timeSeries[[1]] <- c(t, x)
 
+  # add current time to parms
+  parms <- c(parms, .t = t)
+
   # Set up empty vectors for the evaluated propensity functions
   a.funs <- parse.propensity.functions(a, x0, parms)
 
@@ -406,6 +409,7 @@ ssa <- function(
     }
 
     # Evaluate the transition rates for the next time step
+    parms[[".t"]] <- t
     eval_a <- a.funs(x, parms)
     eval_a[is.na(eval_a)] <- 0 # Replace NA with zero (0/0 gives NA)
     if (any(eval_a < 0))
