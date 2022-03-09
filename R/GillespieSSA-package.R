@@ -102,16 +102,16 @@
 #'
 #' @references
 #'  * Brown D. and Rothery P. 1993. Models in biology: mathematics, statistics, and computing. John Wiley & Sons.
-#'  * Cao Y., Li H., and Petzold L. 2004. Efficient formulation of the stochastic simulation algorithm for chemically reacting systems. J. Chem. Phys. 121:4059-4067. <http://dx.doi.org/10.1063/1.1778376>
-#'  * Cao Y., Gillespie D.T., and Petzold L.R. 2006. Efficient step size selection for the tau-leaping method. J. Chem. Phys. 124:044109. <http://dx.doi.org/10.1063/1.2159468>
-#'  * Cao Y., Gillespie D.T., and Petzold L.R. 2007. Adaptive explicit tau-leap method with automatic tau selection. J. Chem. Phys. 126:224101. <http://dx.doi.org/10.1063/1.2745299>
-#'  * Chatterjee A., Vlachos D.G., and Katsoulakis M.A. 2005. Binomial distribution based tau-leap accelerated stochastic simulation. J. Chem. Phys. 122:024112. <http://dx.doi.org/10.1063/1.1833357>
-#'  * Gillespie D.T. 1977. Exact stochastic simulation of coupled chemical reactions. J. Phys. Chem. 81:2340. <http://dx.doi.org/10.1021/j100540a008>
-#'  * Gillespie D.T. 2001. Approximate accelerated stochastic simulation of chemically reacting systems. J. Chem. Phys. 115:1716-1733. <http://dx.doi.org/10.1063/1.1378322>
-#'  * Gillespie D.T. 2007. Stochastic simulation of chemical kinetics. Annu. Rev. Chem. 58:35 <http://dx.doi.org/10.1146/annurev.physchem.58.032806.104637>
-#'  * Kot M. 2001. Elements of mathematical ecology. Cambridge University Press. <http://dx.doi.org/10.1017/CBO9780511608520>
-#'  * Pineda-Krch M. 2008. Implementing the stochastic simulation algorithm in R. Journal of Statistical Software 25(12): 1-18. <http://dx.doi.org/10.18637/jss.v025.i12>
-#'  * Pineda-Krch M., Blok H.J., Dieckmann U., and Doebeli M. 2007. A tale of two cycles --- distinguishing quasi-cycles and limit cycles in finite predator-prey populations. Oikos 116:53-64. <http://dx.doi.org/10.1111/j.2006.0030-1299.14940.x>
+#'  * Cao Y., Li H., and Petzold L. 2004. Efficient formulation of the stochastic simulation algorithm for chemically reacting systems. J. Chem. Phys. 121:4059-4067. \doi{10.1063/1.1778376}
+#'  * Cao Y., Gillespie D.T., and Petzold L.R. 2006. Efficient step size selection for the tau-leaping method. J. Chem. Phys. 124:044109. \doi{10.1063/1.2159468}
+#'  * Cao Y., Gillespie D.T., and Petzold L.R. 2007. Adaptive explicit tau-leap method with automatic tau selection. J. Chem. Phys. 126:224101. \doi{10.1063/1.2745299}
+#'  * Chatterjee A., Vlachos D.G., and Katsoulakis M.A. 2005. Binomial distribution based tau-leap accelerated stochastic simulation. J. Chem. Phys. 122:024112. \doi{10.1063/1.1833357}
+#'  * Gillespie D.T. 1977. Exact stochastic simulation of coupled chemical reactions. J. Phys. Chem. 81:2340. \doi{10.1021/j100540a008}
+#'  * Gillespie D.T. 2001. Approximate accelerated stochastic simulation of chemically reacting systems. J. Chem. Phys. 115:1716-1733. \doi{10.1063/1.1378322}
+#'  * Gillespie D.T. 2007. Stochastic simulation of chemical kinetics. Annu. Rev. Chem. 58:35 \doi{10.1146/annurev.physchem.58.032806.104637}
+#'  * Kot M. 2001. Elements of mathematical ecology. Cambridge University Press. \doi{10.1017/CBO9780511608520}
+#'  * Pineda-Krch M. 2008. Implementing the stochastic simulation algorithm in R. Journal of Statistical Software 25(12): 1-18. \doi{10.18637/jss.v025.i12}
+#'  * Pineda-Krch M., Blok H.J., Dieckmann U., and Doebeli M. 2007. A tale of two cycles --- distinguishing quasi-cycles and limit cycles in finite predator-prey populations. Oikos 116:53-64. \doi{10.1111/j.2006.0030-1299.14940.x}
 #'
 #' @section Acknowledgements:
 #' * Heinrich zu Dohna for many caffein induced discussions on the package and reference manual, and for providing comments on the vignette documentation.

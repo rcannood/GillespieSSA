@@ -12,3 +12,4 @@
 ^vignettes/.*/.*\.png$
 ^inst/NEWS.md$
 ^CRAN-RELEASE$
+^CRAN-SUBMISSION$
