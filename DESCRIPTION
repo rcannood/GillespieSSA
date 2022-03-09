@@ -36,7 +36,7 @@ Suggests:
   knitr,
   rmarkdown,
   testthat
-URL: https://www.github.com/rcannood/GillespieSSA
+URL: https://github.com/rcannood/GillespieSSA
 License: GPL (>= 3)
 LazyData: TRUE
 RoxygenNote: 7.1.2

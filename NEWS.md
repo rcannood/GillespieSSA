@@ -94,4 +94,4 @@ No changes, it seems.
 
 * Initial release 
 
-* Presented at useR! 2007 (as [poster](http://user2007.org/program/posters/pineda-krch.pdf))
+* Presented at useR! 2007 (as poster)
