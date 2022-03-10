@@ -11,8 +11,10 @@
     -   [References](#references)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- badges: start -->
 
-<a href="https://travis-ci.org/rcannood/GillespieSSA"><img src="https://travis-ci.org/rcannood/GillespieSSA.svg" align="left"></a>
+[![R-CMD-check](https://github.com/rcannood/GillespieSSA/workflows/R-CMD-check/badge.svg)](https://github.com/rcannood/GillespieSSA/actions)
+<!-- badges: end -->
 
 # `GillespieSSA`: Gillespie’s Stochastic Simulation Algorithm (SSA)
 

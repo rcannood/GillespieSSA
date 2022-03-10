@@ -13,3 +13,4 @@
 ^inst/NEWS.md$
 ^CRAN-RELEASE$
 ^CRAN-SUBMISSION$
+^\.github$
